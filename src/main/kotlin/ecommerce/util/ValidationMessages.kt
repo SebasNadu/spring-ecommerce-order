@@ -19,4 +19,5 @@ object ValidationMessages {
     const val OPTION_NAME_PATTERN = "Invalid characters in product name."
     const val OPTION_QUANTITY_SIZE = "The Option quantity must be between 1 and 99,999,999"
     const val OPTION_PRODUCT_ID_REQUIRED = "Product ID cannot be blank"
+    const val CART_ITEM_PRODUCT_ID_REQUIRED = "Product ID cannot be blank"
 }

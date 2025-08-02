@@ -1,7 +1,7 @@
 package ecommerce.services
 
 import ecommerce.exception.OperationFailedException
-import ecommerce.mappers.toDto
+import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
 import ecommerce.model.MemberDTO
 import ecommerce.repositories.MemberRepository
@@ -16,17 +16,17 @@ import org.springframework.transaction.annotation.Transactional
 class MemberServiceImpl(private val memberRepository: MemberRepository) : MemberService {
     @Transactional(readOnly = true)
     override fun findAll(): List<MemberDTO> {
-        return memberRepository.findAll().map { it.toDto() }
+        return memberRepository.findAll().map { it.toDTO() }
     }
 
     @Transactional(readOnly = true)
     override fun findById(id: Long): MemberDTO =
-        memberRepository.findByIdOrNull(id)?.toDto()
+        memberRepository.findByIdOrNull(id)?.toDTO()
             ?: throw EmptyResultDataAccessException("Member with ID $id not found", 1)
 
     @Transactional(readOnly = true)
     override fun findByEmail(email: String): MemberDTO {
-        return memberRepository.findByEmail(email)?.toDto()
+        return memberRepository.findByEmail(email)?.toDTO()
             ?: throw EmptyResultDataAccessException("Member with Email $email not found", 1)
     }
 
@@ -36,7 +36,7 @@ class MemberServiceImpl(private val memberRepository: MemberRepository) : Member
         val saved =
             memberRepository.save(memberDTO.toEntity())
                 ?: throw OperationFailedException("Failed to save product")
-        return saved.toDto()
+        return saved.toDTO()
     }
 
     @Transactional(readOnly = true)

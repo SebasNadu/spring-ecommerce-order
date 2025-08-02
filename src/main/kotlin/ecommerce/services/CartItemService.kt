@@ -7,7 +7,7 @@ import ecommerce.model.MemberDTO
 interface CartItemService {
     fun addOrUpdate(
         cartItemRequestDTO: CartItemRequestDTO,
-        member: MemberDTO,
+        memberId: Long,
     ): CartItemResponseDTO
 
     fun findByMember(memberId: Long): List<CartItemResponseDTO>

@@ -2,6 +2,8 @@ package ecommerce.config.resolvers
 
 import ecommerce.annotation.LoginMember
 import ecommerce.exception.AuthorizationException
+import ecommerce.mappers.toLoginDTO
+import ecommerce.model.MemberLoginDTO
 import ecommerce.services.MemberService
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
@@ -28,6 +30,6 @@ class LoginMemberArgumentResolver(
         val email =
             webRequest.getAttribute("email", RequestAttributes.SCOPE_REQUEST) as? String
                 ?: throw AuthorizationException("Email attribute missing")
-        return memberService.findByEmail(email)
+        return memberService.findByEmail(email).toLoginDTO()
     }
 }
