@@ -1,5 +1,6 @@
 package ecommerce.services
 
+import ecommerce.exception.ForbiddenException
 import ecommerce.infrastructure.JwtTokenProvider
 import ecommerce.model.MemberDTO
 import ecommerce.model.TokenRequestDTO
@@ -9,7 +10,13 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AuthService(private val jwtTokenProvider: JwtTokenProvider, private val memberService: MemberService) {
-    @Transactional(readOnly = true)
+    @Transactional
+    fun login(tokenRequestDTO: TokenRequestDTO): TokenResponseDTO {
+        if (checkInvalidLogin(tokenRequestDTO)) throw ForbiddenException("Invalid email or password.")
+        val memberDTO = memberService.findByEmail(tokenRequestDTO.email)
+        return createToken(memberDTO)
+    }
+
     fun checkInvalidLogin(tokenRequestDTO: TokenRequestDTO): Boolean {
         val memberDTO = memberService.findByEmail(tokenRequestDTO.email)
         return tokenRequestDTO.email != memberDTO.email || tokenRequestDTO.password != memberDTO.password

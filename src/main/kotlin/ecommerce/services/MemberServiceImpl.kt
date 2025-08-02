@@ -4,6 +4,7 @@ import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
 import ecommerce.model.MemberDTO
+import ecommerce.model.MemberRegisterDTO
 import ecommerce.repositories.MemberRepository
 import org.springframework.context.annotation.Primary
 import org.springframework.dao.EmptyResultDataAccessException
@@ -31,10 +32,10 @@ class MemberServiceImpl(private val memberRepository: MemberRepository) : Member
     }
 
     @Transactional
-    override fun save(memberDTO: MemberDTO): MemberDTO {
-        validateEmailUniqueness(memberDTO.email)
+    override fun save(memberRegisterDTO: MemberRegisterDTO): MemberDTO {
+        validateEmailUniqueness(memberRegisterDTO.email)
         val saved =
-            memberRepository.save(memberDTO.toEntity())
+            memberRepository.save(memberRegisterDTO.toEntity())
                 ?: throw OperationFailedException("Failed to save product")
         return saved.toDTO()
     }

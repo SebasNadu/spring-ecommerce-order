@@ -1,8 +1,8 @@
 package ecommerce.controller
 
-import ecommerce.exception.ForbiddenException
 import ecommerce.infrastructure.AuthorizationExtractor
 import ecommerce.model.MemberDTO
+import ecommerce.model.MemberRegisterDTO
 import ecommerce.model.TokenRequestDTO
 import ecommerce.model.TokenResponseDTO
 import ecommerce.services.AuthService
@@ -25,9 +25,9 @@ class MemberController(
 ) {
     @PostMapping("/register")
     fun register(
-        @Valid @RequestBody memberDTO: MemberDTO,
+        @Valid @RequestBody memberRegisterDTO: MemberRegisterDTO,
     ): ResponseEntity<TokenResponseDTO> {
-        val memberDTO: MemberDTO = memberService.save(memberDTO)
+        val memberDTO: MemberDTO = memberService.save(memberRegisterDTO)
         val tokenResponse = authService.createToken(memberDTO)
         return ResponseEntity.ok().body(tokenResponse)
     }
@@ -36,9 +36,7 @@ class MemberController(
     fun login(
         @Valid @RequestBody tokenRequestDTO: TokenRequestDTO,
     ): ResponseEntity<TokenResponseDTO> {
-        if (authService.checkInvalidLogin(tokenRequestDTO)) throw ForbiddenException("Invalid email or password.")
-        val memberDTO = memberService.findByEmail(tokenRequestDTO.email)
-        val tokenResponse = authService.createToken(memberDTO)
+        val tokenResponse = authService.login(tokenRequestDTO)
         return ResponseEntity.ok().body(tokenResponse)
     }
 

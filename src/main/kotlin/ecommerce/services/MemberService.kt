@@ -1,6 +1,7 @@
 package ecommerce.services
 
 import ecommerce.model.MemberDTO
+import ecommerce.model.MemberRegisterDTO
 
 interface MemberService {
     fun findAll(): List<MemberDTO>
@@ -9,7 +10,7 @@ interface MemberService {
 
     fun findByEmail(email: String): MemberDTO
 
-    fun save(memberDTO: MemberDTO): MemberDTO
+    fun save(memberRegisterDTO: MemberRegisterDTO): MemberDTO
 
     fun validateEmailUniqueness(email: String)
 

@@ -2,7 +2,7 @@ package ecommerce.integration
 
 import ecommerce.entities.Member
 import ecommerce.exception.OperationFailedException
-import ecommerce.model.MemberDTO
+import ecommerce.model.MemberRegisterDTO
 import ecommerce.repositories.MemberRepository
 import ecommerce.services.MemberServiceImpl
 import org.assertj.core.api.Assertions.assertThat
@@ -71,7 +71,7 @@ class MemberServiceTest {
 
     @Test
     fun `save should persist member and return DTO`() {
-        val dto = MemberDTO(name = "new", email = "new@test.com", password = "secure")
+        val dto = MemberRegisterDTO(name = "new", email = "new@test.com", password = "secure")
 
         val saved = memberService.save(dto)
 
@@ -85,7 +85,7 @@ class MemberServiceTest {
 
         val ex =
             assertThrows<OperationFailedException> {
-                memberService.save(MemberDTO(name = "exists2", email = "exists@test.com", password = "new"))
+                memberService.save(MemberRegisterDTO(name = "exists2", email = "exists@test.com", password = "new"))
             }
 
         assertThat(ex.message).contains("already exists")
