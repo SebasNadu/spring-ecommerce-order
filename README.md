@@ -17,7 +17,3 @@
 
 - [x] Add Admin functionality to create new option for product
 - [x] Create an endpoint in the admin controller for adding new options to products
-
-
-### Future work (maybe?)
-- [ ] Subtract the user option choice from stock for a product option

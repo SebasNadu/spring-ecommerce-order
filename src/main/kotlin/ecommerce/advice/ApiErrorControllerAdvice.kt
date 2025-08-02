@@ -44,7 +44,7 @@ class ApiErrorControllerAdvice {
     @ExceptionHandler(NoSuchElementException::class)
     fun handleNotSuchElementException(e: NoSuchElementException): ResponseEntity<Map<String, Any>> {
         val errorMessage = e.message ?: "Not such element"
-        log.warn("NoSuchElementException occurred: $errorMessage", e)
+        log.error("NoSuchElementException occurred: $errorMessage", e)
         val body =
             mapOf(
                 "status" to HttpStatus.NOT_FOUND.value(),
@@ -58,7 +58,7 @@ class ApiErrorControllerAdvice {
     @ExceptionHandler(OperationFailedException::class)
     fun handleOperationFailedException(e: OperationFailedException): ResponseEntity<Map<String, Any>> {
         val errorMessage = e.message ?: "Operation failed"
-        log.warn("OperationFailedException: $errorMessage", e)
+        log.error("OperationFailedException: $errorMessage", e)
         val body =
             mapOf(
                 "status" to HttpStatus.BAD_REQUEST.value(),
@@ -159,7 +159,7 @@ class ApiErrorControllerAdvice {
     @ExceptionHandler(DataAccessException::class)
     fun handleDataAccessException(e: DataAccessException): ResponseEntity<Map<String, Any>> {
         val errorMessage = e.message ?: "Data Access Error"
-        log.warn("DataAccessException: $errorMessage", e)
+        log.error("DataAccessException: $errorMessage", e)
         val body =
             mapOf(
                 "status" to HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -187,7 +187,7 @@ class ApiErrorControllerAdvice {
     @ExceptionHandler(EmptyResultDataAccessException::class)
     fun handleEmptyResultException(e: EmptyResultDataAccessException): ResponseEntity<Map<String, Any>> {
         val errorMessage = e.message ?: "Empty result for your query"
-        log.warn("EmptyResultDataAccessException: $errorMessage", e)
+        log.error("EmptyResultDataAccessException: $errorMessage", e)
         val body =
             mapOf(
                 "status" to HttpStatus.NOT_FOUND.value(),

@@ -24,7 +24,6 @@ val assureVersion = "5.5.5"
 val h2Version = "2.2.224"
 val jwtVersion = "0.12.6"
 dependencies {
-//    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
