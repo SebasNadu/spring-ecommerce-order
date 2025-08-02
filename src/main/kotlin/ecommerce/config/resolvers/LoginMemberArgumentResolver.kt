@@ -3,7 +3,6 @@ package ecommerce.config.resolvers
 import ecommerce.annotation.LoginMember
 import ecommerce.exception.AuthorizationException
 import ecommerce.mappers.toLoginDTO
-import ecommerce.model.MemberLoginDTO
 import ecommerce.services.MemberService
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component

@@ -2,7 +2,6 @@ package ecommerce.endtoend
 
 import ecommerce.model.ActiveMemberDTO
 import ecommerce.model.OptionDTO
-import ecommerce.model.ProductRequestDTO
 import ecommerce.model.ProductResponseDTO
 import ecommerce.model.TopProductDTO
 import io.restassured.RestAssured
@@ -241,14 +240,12 @@ class AdminE2ETest {
                 productId = product.id,
             )
 
-        // Create first option
         RestAssured.given()
             .auth().oauth2(token)
             .contentType(ContentType.JSON)
             .body(optionDTO)
             .post("/admin/option")
 
-        // Try to create duplicate option
         val response =
             RestAssured.given()
                 .auth().oauth2(token)
@@ -261,30 +258,5 @@ class AdminE2ETest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value())
         assertThat(response.body().jsonPath().getString("message"))
             .contains("Option with name 'Test Option' already exists")
-    }
-
-    private fun createTestProduct(): Long {
-        val productDTO =
-            ProductRequestDTO(
-                name = "Test Product",
-                price = 99.99,
-                imageUrl = "http://example.com/image.jpg",
-                options =
-                    setOf(
-                        OptionDTO(
-                            name = "Deniz",
-                            quantity = 1,
-                            productId = null,
-                            id = null,
-                        ),
-                    ),
-            )
-
-        return RestAssured.given()
-            .auth().oauth2(token)
-            .contentType(ContentType.JSON)
-            .body(productDTO)
-            .post("/api/products")
-            .then().extract().jsonPath().getLong("id")
     }
 }

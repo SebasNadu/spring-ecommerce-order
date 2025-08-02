@@ -3,7 +3,6 @@ package ecommerce.controller
 import ecommerce.annotation.LoginMember
 import ecommerce.model.CartItemRequestDTO
 import ecommerce.model.CartItemResponseDTO
-import ecommerce.model.MemberDTO
 import ecommerce.model.MemberLoginDTO
 import ecommerce.services.CartItemService
 import org.springframework.http.ResponseEntity

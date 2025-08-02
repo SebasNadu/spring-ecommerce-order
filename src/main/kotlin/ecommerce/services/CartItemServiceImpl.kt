@@ -18,7 +18,7 @@ import java.time.LocalDateTime
 class CartItemServiceImpl(
     private val cartItemRepository: CartItemRepository,
     private val productRepository: ProductRepository,
-    private val memberService: MemberService
+    private val memberService: MemberService,
 ) : CartItemService {
     @Transactional
     override fun addOrUpdate(

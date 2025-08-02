@@ -13,9 +13,15 @@ interface WishItemService {
 
     fun findByMember(memberId: Long): List<WishItemResponseDTO>
 
-    fun findByMember(memberId: Long, page: Pageable): Page<WishItemResponseDTO>
+    fun findByMember(
+        memberId: Long,
+        page: Pageable,
+    ): Page<WishItemResponseDTO>
 
-    fun delete(wishItemRequestDTO: WishItemRequestDTO, memberId: Long)
+    fun delete(
+        wishItemRequestDTO: WishItemRequestDTO,
+        memberId: Long,
+    )
 
     fun deleteAll()
 }

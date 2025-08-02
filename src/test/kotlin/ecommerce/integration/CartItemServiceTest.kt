@@ -60,25 +60,13 @@ class CartItemServiceTest {
     fun `addOrUpdate should update quantity if item exists`() {
         val initial = CartItemRequestDTO(productId = productId, quantity = 1)
         val member = memberRepository.findByIdOrNull(memberId)?.toDTO()
-        val newItem = cartItemService.addOrUpdate(initial, member?.id!!)
+        cartItemService.addOrUpdate(initial, member?.id!!)
 
         val updated = CartItemRequestDTO(productId = productId, quantity = 5)
         val result = cartItemService.addOrUpdate(updated, member.id!!)
 
         assertThat(result.quantity).isEqualTo(5)
     }
-//    @Test
-//    fun `addOrUpdate should update quantity if item exists`() {
-//        val initial = CartItemRequestDTO(productId = productId, quantity = 1)
-//        val member = memberRepository.findByIdOrNull(memberId)?.toDto()
-//        val newItem = cartItemService.addOrUpdate(initial, member!!)
-// //
-// //
-// //        val updated = CartItemRequestDTO(productId = productId, quantity = 5)
-// //        val result = cartItemService.addOrUpdate(updated, member)
-// //
-//        assertThat(newItem.quantity).isEqualTo(1)
-//    }
 
     @Test
     fun `addOrUpdate should throw if product not found`() {
