@@ -43,8 +43,8 @@ class CartItemServiceImpl(
 
         return itemsWithProducts.map { cartItem ->
             CartItemResponseDTO(
-                id = cartItem.id!!,
-                memberId = cartItem.member.id!!,
+                id = cartItem.id,
+                memberId = cartItem.member.id,
                 product = cartItem.product.toDTO(),
                 quantity = cartItem.quantity,
                 addedAt = cartItem.addedAt,

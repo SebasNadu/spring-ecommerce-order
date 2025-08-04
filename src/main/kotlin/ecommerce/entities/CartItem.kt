@@ -18,10 +18,10 @@ import java.time.LocalDateTime
     uniqueConstraints = [UniqueConstraint(columnNames = ["member_id", "product_id"])],
 )
 class CartItem(
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "member_id", nullable = false)
     val member: Member,
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
     val product: Product,
     @Column(name = "quantity", nullable = false)
@@ -30,6 +30,17 @@ class CartItem(
     val addedAt: LocalDateTime,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
+    val id: Long = 0L,
 ) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is CartItem) return false
+        return member == other.member && product == other.product
+    }
+
+    override fun hashCode(): Int {
+        var result = member.hashCode()
+        result = 31 * result + product.hashCode()
+        return result
+    }
 }

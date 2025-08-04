@@ -11,7 +11,6 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 
@@ -25,12 +24,12 @@ class Product(
     @Column(name = "image_url", nullable = false, length = 255)
     var imageUrl: String,
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val cartItems: MutableList<CartItem> = mutableListOf(),
+    val cartItems: MutableSet<CartItem> = mutableSetOf(),
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
-    private val _options: MutableList<Option> = mutableListOf(),
+    private val _options: MutableSet<Option> = mutableSetOf(),
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
+    val id: Long = 0L,
 ) {
     var options: List<Option>
         get() = _options.toList()
@@ -76,4 +75,12 @@ class Product(
             } ?: dto.toEntity(this)
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Product) return false
+        return id != 0L && id == other.id
+    }
+
+    override fun hashCode(): Int = id.hashCode()
 }

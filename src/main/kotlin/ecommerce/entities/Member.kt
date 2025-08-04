@@ -24,12 +24,21 @@ class Member(
     @Column(name = "role", nullable = false, length = 20)
     val role: Role = Role.CUSTOMER,
     @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val cartItems: Set<CartItem> = emptySet(),
+    val cartItems: MutableSet<CartItem> = mutableSetOf(),
     @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val wishItems: Set<WishItem> = emptySet(),
+    val wishItems: MutableSet<WishItem> = mutableSetOf(),
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
+    val id: Long = 0L,
 ) {
     enum class Role { CUSTOMER, ADMIN }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Member) return false
+        if (id == 0L || other.id == 0L) return false
+        return id == other.id
+    }
+
+    override fun hashCode(): Int = id.hashCode()
 }

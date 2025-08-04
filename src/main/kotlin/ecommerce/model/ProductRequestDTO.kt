@@ -28,5 +28,5 @@ data class ProductRequestDTO(
     var imageUrl: String,
     @field:NotEmpty(message = OPTION_REQUIRED)
     val options: Set<OptionDTO>,
-    var id: Long = 0L
+    var id: Long = 0L,
 )

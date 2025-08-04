@@ -47,8 +47,8 @@ class WishItemServiceImpl(
 
         return wishItems.map { cartItem ->
             WishItemResponseDTO(
-                id = cartItem.id!!,
-                memberId = cartItem.member.id!!,
+                id = cartItem.id,
+                memberId = cartItem.member.id,
                 product = cartItem.product.toDTO(),
                 addedAt = cartItem.addedAt,
             )
@@ -64,8 +64,8 @@ class WishItemServiceImpl(
 
         return wishItems.map { cartItem ->
             WishItemResponseDTO(
-                id = cartItem.id!!,
-                memberId = cartItem.member.id!!,
+                id = cartItem.id,
+                memberId = cartItem.member.id,
                 product = cartItem.product.toDTO(),
                 addedAt = cartItem.addedAt,
             )

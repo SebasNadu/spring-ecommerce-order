@@ -13,13 +13,13 @@ import jakarta.validation.constraints.Size
 
 data class MemberRegisterDTO(
     @field:NotBlank(message = MEMBER_NAME_REQUIRED)
-    @field:Size(min=1, max=50, message = MEMBER_NAME_SIZE)
+    @field:Size(min = 1, max = 50, message = MEMBER_NAME_SIZE)
     var name: String,
     @field:NotBlank(message = EMAIL_BLANK)
     @field:Email(message = EMAIL_INVALID)
-    @field:Size(min=1, max=100, message = EMAIL_SIZE)
+    @field:Size(min = 1, max = 100, message = EMAIL_SIZE)
     var email: String,
     @field:NotBlank(message = PASSWORD_BLANK)
-    @field:Size(min=1, max=255, message = PASSWORD_SIZE)
+    @field:Size(min = 1, max = 255, message = PASSWORD_SIZE)
     var password: String,
 )

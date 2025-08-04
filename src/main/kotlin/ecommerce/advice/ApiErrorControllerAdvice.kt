@@ -159,12 +159,13 @@ class ApiErrorControllerAdvice {
     @ExceptionHandler(Exception::class)
     fun handleGenericException(e: Exception): ResponseEntity<Map<String, Any>> {
         log.error("Unhandled exception occurred: ${e.message}", e)
-        val body = mapOf(
-            "status" to HttpStatus.INTERNAL_SERVER_ERROR.value(),
-            "error" to "Internal Server Error",
-            "message" to "An unexpected error occurred",
-            "timestamp" to Instant.now()
-        )
+        val body =
+            mapOf(
+                "status" to HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "error" to "Internal Server Error",
+                "message" to "An unexpected error occurred",
+                "timestamp" to Instant.now(),
+            )
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body)
     }
 

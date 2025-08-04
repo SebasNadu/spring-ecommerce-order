@@ -40,7 +40,7 @@ class CartItemServiceTest {
                 imageUrl = "keyboard.png",
             )
 
-        productId = productRepository.save(product).id!!
+        productId = productRepository.save(product).id
     }
 
     @Test
@@ -62,7 +62,7 @@ class CartItemServiceTest {
         cartItemService.addOrUpdate(initial, member?.id!!)
 
         val updated = CartItemRequestDTO(productId = productId, quantity = 5)
-        val result = cartItemService.addOrUpdate(updated, member.id!!)
+        val result = cartItemService.addOrUpdate(updated, member.id)
 
         assertThat(result.quantity).isEqualTo(5)
     }

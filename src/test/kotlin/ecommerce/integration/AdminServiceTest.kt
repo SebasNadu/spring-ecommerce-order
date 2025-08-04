@@ -50,9 +50,9 @@ class AdminServiceTest {
         product1 = productRepository.save(Product(name = "Mouse", price = 10.0, imageUrl = "mouse.jpg"))
         product2 = productRepository.save(Product(name = "Keyboard", price = 20.0, imageUrl = "keyboard.jpg"))
 
-        cartItemService.addOrUpdate(CartItemRequestDTO(product1.id!!, 1), member1.id!!)
-        cartItemService.addOrUpdate(CartItemRequestDTO(product2.id!!, 2), member1.id!!)
-        cartItemService.addOrUpdate(CartItemRequestDTO(product2.id!!, 1), member2.id!!)
+        cartItemService.addOrUpdate(CartItemRequestDTO(product1.id, 1), member1.id)
+        cartItemService.addOrUpdate(CartItemRequestDTO(product2.id, 2), member1.id)
+        cartItemService.addOrUpdate(CartItemRequestDTO(product2.id, 1), member2.id)
     }
 
     @Test

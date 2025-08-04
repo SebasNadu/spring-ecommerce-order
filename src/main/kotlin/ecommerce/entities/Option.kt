@@ -22,12 +22,12 @@ import jakarta.persistence.UniqueConstraint
 class Option(
     name: String,
     quantity: Long,
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    var product: Product? = null,
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
+    var product: Product,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
+    val id: Long = 0L,
 ) {
     @Column(name = "name", nullable = false, length = 50)
     var name: String = name
@@ -54,9 +54,21 @@ class Option(
         this.quantity -= quantity
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this == other) return true
+        if (other !is Option) return false
+        return product == other.product && name == other.name
+    }
+
+    override fun hashCode(): Int {
+        var result = product.hashCode()
+        result = 31 * result + name.hashCode()
+        return result
+    }
+
     private fun validateName(name: String) {
         if (name.length > 50) throw InvalidOptionNameException("Option name too long")
-        val allowed = Regex("^[\\p{Alnum} \\(\\)\\[\\]\\+\\-\\&\\/_]+$")
+        val allowed = Regex("^[\\p{Alnum} ()\\[\\]+\\-&/_]+$")
         if (!allowed.matches(name)) throw InvalidOptionNameException("Option names contains invalid characters: '$name'")
     }
 
