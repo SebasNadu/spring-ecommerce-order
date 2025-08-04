@@ -78,7 +78,6 @@ class CartItemE2ETest {
 
     @Test
     fun `delete cart item`() {
-//        addCartItem()
         val cartItem = addCartItemAndReturn()
         val products =
             RestAssured.given()

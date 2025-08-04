@@ -18,15 +18,16 @@ import java.time.LocalDateTime
     uniqueConstraints = [UniqueConstraint(columnNames = ["member_id", "product_id"])],
 )
 class WishItem(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     val member: Member,
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", nullable = false)
     val product: Product,
     @Column(name = "added_at", nullable = false)
     val addedAt: LocalDateTime,
-)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+) {
+}

@@ -14,22 +14,22 @@ import jakarta.persistence.Table
 @Entity
 @Table(name = "member")
 class Member(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 50)
     val name: String,
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, length = 100)
     val email: String,
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 255)
     val password: String,
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, length = 20)
     val role: Role = Role.CUSTOMER,
     @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
     val cartItems: Set<CartItem> = emptySet(),
     @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
     val wishItems: Set<WishItem> = emptySet(),
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L
 ) {
     enum class Role { CUSTOMER, ADMIN }
 }

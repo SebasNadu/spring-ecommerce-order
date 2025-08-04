@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 
 data class OptionDTO(
-    val id: Long?,
     @field:NotBlank(message = OPTION_NAME_REQUIRED)
     @field:Size(min = 1, max = 50, message = OPTION_NAME_SIZE)
     @field:Pattern(regexp = "^[a-zA-Z0-9 ()\\[\\]+\\-&/_]*$", message = OPTION_NAME_PATTERN)
@@ -19,4 +18,5 @@ data class OptionDTO(
     val quantity: Long,
     @field:NotBlank(message = OPTION_PRODUCT_ID_REQUIRED)
     val productId: Long? = null,
+    val id: Long = 0L,
 )

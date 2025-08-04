@@ -20,14 +20,14 @@ import jakarta.persistence.UniqueConstraint
     uniqueConstraints = [UniqueConstraint(columnNames = ["product_id", "name"])],
 )
 class Option(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
     name: String,
     quantity: Long,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     var product: Product? = null,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L
 ) {
     @Column(name = "name", nullable = false, length = 50)
     var name: String = name

@@ -35,7 +35,6 @@ class CartItemServiceTest {
     fun setup() {
         val product =
             Product(
-                id = null,
                 name = "Keyboard",
                 price = 50.0,
                 imageUrl = "keyboard.png",

@@ -28,7 +28,6 @@ class ProductServiceTest(
     fun setup() {
         product =
             ProductRequestDTO(
-                id = null,
                 name = "Test Product",
                 price = 19.99,
                 imageUrl = "https://example.com/test.png",
@@ -62,11 +61,11 @@ class ProductServiceTest(
 
         val request =
             ProductRequestDTO(
-                updated.id,
                 updated.name,
                 price = updated.price,
                 imageUrl = updated.imageUrl,
                 options = updated.options.toSet(),
+                updated.id,
             )
         val result = productService.updateById(saved.id!!, request)!!
 

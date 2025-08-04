@@ -18,20 +18,19 @@ import jakarta.persistence.Table
 @Entity
 @Table(name = "product")
 class Product(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 15)
     var name: String,
     @Column(name = "price", nullable = false)
     var price: Double,
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "image_url", nullable = false, length = 255)
     var imageUrl: String,
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val cartItems: Set<CartItem> = emptySet(),
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinColumn(name = "product", nullable = false)
+    val cartItems: MutableList<CartItem> = mutableListOf(),
+    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     private val _options: MutableList<Option> = mutableListOf(),
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L
 ) {
     var options: List<Option>
         get() = _options.toList()

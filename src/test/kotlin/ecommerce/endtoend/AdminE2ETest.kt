@@ -135,7 +135,6 @@ class AdminE2ETest {
         // Create option for the product
         val optionDTO =
             OptionDTO(
-                id = null,
                 name = "Test Option",
                 quantity = 10,
                 productId = product.id,
@@ -158,7 +157,6 @@ class AdminE2ETest {
         val longName = "a".repeat(51)
         val optionDTO =
             OptionDTO(
-                id = null,
                 name = longName,
                 quantity = 10,
                 productId = product.id,
@@ -180,7 +178,6 @@ class AdminE2ETest {
     fun `Should return error when option quantity is less than 1`() {
         val optionDTO =
             OptionDTO(
-                id = null,
                 name = "Test Option",
                 quantity = 0,
                 productId = product.id,
@@ -202,7 +199,6 @@ class AdminE2ETest {
     fun `Should return error when option quantity is greater than or equal to 100_000_000`() {
         val optionDTO =
             OptionDTO(
-                id = null,
                 name = "Test Option",
                 quantity = 100_000_000,
                 productId = product.id,
@@ -234,7 +230,6 @@ class AdminE2ETest {
 
         val optionDTO =
             OptionDTO(
-                id = null,
                 name = "Test Option",
                 quantity = 10,
                 productId = product.id,

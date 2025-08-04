@@ -6,6 +6,6 @@ import ecommerce.model.ProductResponseDTO
 
 fun Product.toDTO(): ProductResponseDTO = ProductResponseDTO(id, name, price, imageUrl, options = options.map { it.toDTO() })
 
-fun ProductRequestDTO.toEntity(): Product = Product(id, name, price, imageUrl)
+fun ProductRequestDTO.toEntity(): Product = Product(name, price, imageUrl, id = id)
 
-fun ProductResponseDTO.toEntity(): Product = Product(id, name, price, imageUrl)
+fun ProductResponseDTO.toEntity(): Product = Product(name, price, imageUrl, id = id)

@@ -57,14 +57,12 @@ class ProductE2ETest {
     fun getProduct() {
         val productDTO =
             ProductRequestDTO(
-                id = null,
                 name = "TV",
                 price = 99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -104,14 +102,12 @@ class ProductE2ETest {
     fun createProduct() {
         val newProductDTO =
             ProductRequestDTO(
-                id = null,
                 name = "Monitor",
                 price = 150.0,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -136,14 +132,12 @@ class ProductE2ETest {
     fun `Should return error when product name use invalid characters`() {
         val newProductDTO =
             ProductRequestDTO(
-                id = null,
                 name = "!@#$%^&*()_+}{",
                 price = 99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -170,14 +164,12 @@ class ProductE2ETest {
     fun `Should return error when product name is bigger than 15 characters`() {
         val newProductDTO =
             ProductRequestDTO(
-                id = null,
                 name = "SpeakersareLovemyDearDearDear",
                 price = 99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -204,14 +196,12 @@ class ProductE2ETest {
     fun `Should return error when product name already exists`() {
         val dto =
             ProductRequestDTO(
-                id = null,
                 name = "Speaker",
                 price = 99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -238,14 +228,12 @@ class ProductE2ETest {
     fun `Should return error when product price is negative value`() {
         val newProductDTO =
             ProductRequestDTO(
-                id = null,
                 name = "Speaker",
                 price = -99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -272,14 +260,12 @@ class ProductE2ETest {
     fun updateProduct() {
         val created =
             ProductRequestDTO(
-                id = null,
                 name = "Speaker",
                 price = 99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -296,14 +282,12 @@ class ProductE2ETest {
 
         val updated =
             ProductRequestDTO(
-                id = null,
                 name = "Gaming Mouse",
                 price = 45.0,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "ello",
                             quantity = 99,
                             productId = null,
@@ -328,14 +312,12 @@ class ProductE2ETest {
     fun patchProduct() {
         val created =
             ProductRequestDTO(
-                id = null,
                 name = "Tv",
                 price = 99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,
@@ -368,14 +350,12 @@ class ProductE2ETest {
     fun deleteProduct() {
         val created =
             ProductRequestDTO(
-                id = null,
                 name = "Toilet",
                 price = 99.99,
                 imageUrl = "https://example.com/speaker.jpg",
                 options =
                     setOf(
                         OptionDTO(
-                            id = null,
                             name = "hi",
                             quantity = 99,
                             productId = null,

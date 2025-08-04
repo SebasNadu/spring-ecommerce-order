@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.Size
 
 data class ProductResponseDTO(
-    var id: Long? = null,
+    var id: Long,
     @field:NotBlank(message = NAME_REQUIRED)
     @field:Size(min = 1, max = 15, message = PRODUCT_NAME_SIZE)
     @field:Pattern(regexp = "^[a-zA-Z0-9 ()\\[\\]+\\-&/_]*$", message = NAME_PATTERN)
