@@ -1,20 +1,19 @@
-package ecommerce.services
+package ecommerce.services.member
 
+import ecommerce.controller.member.usecase.CrudMemberUseCase
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
 import ecommerce.model.MemberDTO
 import ecommerce.model.MemberRegisterDTO
 import ecommerce.repositories.MemberRepository
-import org.springframework.context.annotation.Primary
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-@Primary
-class MemberServiceImpl(private val memberRepository: MemberRepository) : MemberService {
+class MemberServiceImpl(private val memberRepository: MemberRepository) : CrudMemberUseCase {
     @Transactional(readOnly = true)
     override fun findAll(): List<MemberDTO> {
         return memberRepository.findAll().map { it.toDTO() }
@@ -40,15 +39,15 @@ class MemberServiceImpl(private val memberRepository: MemberRepository) : Member
         return saved.toDTO()
     }
 
+    @Transactional
+    override fun deleteAll() {
+        memberRepository.deleteAll()
+    }
+
     @Transactional(readOnly = true)
     override fun validateEmailUniqueness(email: String) {
         if (memberRepository.existsByEmail(email)) {
             throw OperationFailedException("Member with email '$email' already exists")
         }
-    }
-
-    @Transactional
-    override fun deleteAll() {
-        memberRepository.deleteAll()
     }
 }

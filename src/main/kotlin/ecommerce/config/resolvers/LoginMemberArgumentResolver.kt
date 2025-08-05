@@ -1,9 +1,9 @@
 package ecommerce.config.resolvers
 
 import ecommerce.annotation.LoginMember
+import ecommerce.controller.member.usecase.CrudMemberUseCase
 import ecommerce.exception.AuthorizationException
 import ecommerce.mappers.toLoginDTO
-import ecommerce.services.MemberService
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.support.WebDataBinderFactory
@@ -14,7 +14,7 @@ import org.springframework.web.method.support.ModelAndViewContainer
 
 @Component
 class LoginMemberArgumentResolver(
-    private val memberService: MemberService,
+    private val memberService: CrudMemberUseCase,
 ) : HandlerMethodArgumentResolver {
     override fun supportsParameter(parameter: MethodParameter): Boolean {
         return parameter.hasParameterAnnotation(LoginMember::class.java)

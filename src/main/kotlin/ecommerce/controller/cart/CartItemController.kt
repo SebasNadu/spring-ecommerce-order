@@ -1,10 +1,10 @@
-package ecommerce.controller
+package ecommerce.controller.cart
 
 import ecommerce.annotation.LoginMember
+import ecommerce.controller.cart.usecase.ManageCartItemUseCase
 import ecommerce.model.CartItemRequestDTO
 import ecommerce.model.CartItemResponseDTO
 import ecommerce.model.MemberLoginDTO
-import ecommerce.services.CartItemService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/cart")
-class CartItemController(private val cartItemService: CartItemService) {
+class CartItemController(private val cartItemService: ManageCartItemUseCase) {
     @GetMapping
     fun getCartItemsWithProducts(
         @LoginMember member: MemberLoginDTO,

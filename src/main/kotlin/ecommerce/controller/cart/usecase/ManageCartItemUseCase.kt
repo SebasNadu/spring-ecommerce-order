@@ -1,9 +1,9 @@
-package ecommerce.services
+package ecommerce.controller.cart.usecase
 
 import ecommerce.model.CartItemRequestDTO
 import ecommerce.model.CartItemResponseDTO
 
-interface CartItemService {
+interface ManageCartItemUseCase {
     fun addOrUpdate(
         cartItemRequestDTO: CartItemRequestDTO,
         memberId: Long,

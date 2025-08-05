@@ -1,10 +1,10 @@
-package ecommerce.controller
+package ecommerce.controller.wish
 
 import ecommerce.annotation.LoginMember
 import ecommerce.model.MemberLoginDTO
 import ecommerce.model.WishItemRequestDTO
 import ecommerce.model.WishItemResponseDTO
-import ecommerce.services.WishItemServiceImpl
+import ecommerce.services.wish.WishItemServiceImpl
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort

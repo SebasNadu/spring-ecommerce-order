@@ -1,10 +1,9 @@
 package ecommerce.integration
 
+import ecommerce.controller.product.usecase.CrudProductUseCase
 import ecommerce.exception.NotFoundException
 import ecommerce.model.ProductPatchDTO
 import ecommerce.model.ProductRequestDTO
-import ecommerce.repositories.ProductRepository
-import ecommerce.services.ProductService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,8 +18,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 @SpringBootTest
 class ProductServiceTest(
-    @Autowired val productService: ProductService,
-    @Autowired val productRepository: ProductRepository,
+    @Autowired val productService: CrudProductUseCase,
 ) {
     private lateinit var product: ProductRequestDTO
 
@@ -48,7 +46,7 @@ class ProductServiceTest(
     @Test
     fun `should retrieve product by id`() {
         val saved = productService.save(product)
-        val found = productService.findById(saved.id!!)
+        val found = productService.findById(saved.id)
 
         assertThat(found.name).isEqualTo(saved.name)
         assertThat(found.price).isEqualTo(saved.price)
@@ -67,7 +65,7 @@ class ProductServiceTest(
                 options = updated.options.toSet(),
                 updated.id,
             )
-        val result = productService.updateById(saved.id!!, request)!!
+        val result = productService.updateById(saved.id, request)
 
         assertThat(result.name).isEqualTo("Updated")
         assertThat(result.price).isEqualTo(49.99)
@@ -78,7 +76,7 @@ class ProductServiceTest(
         val saved = productService.save(product)
         val patch = ProductPatchDTO(name = "Patched Name")
 
-        val result = productService.patchById(saved.id!!, patch)!!
+        val result = productService.patchById(saved.id, patch)
 
         assertThat(result.name).isEqualTo("Patched Name")
         assertThat(result.price).isEqualTo(saved.price)
@@ -124,9 +122,9 @@ class ProductServiceTest(
     fun `should delete product by id`() {
         val saved = productService.save(product)
 
-        productService.deleteById(saved.id!!)
+        productService.deleteById(saved.id)
 
-        assertThrows<NotFoundException> { productService.findById(saved.id!!) }
+        assertThrows<NotFoundException> { productService.findById(saved.id) }
     }
 
     @Test

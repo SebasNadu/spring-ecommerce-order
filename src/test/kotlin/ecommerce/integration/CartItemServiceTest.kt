@@ -1,11 +1,11 @@
 package ecommerce.integration
 
+import ecommerce.controller.cart.usecase.ManageCartItemUseCase
 import ecommerce.entities.Product
 import ecommerce.mappers.toDTO
 import ecommerce.model.CartItemRequestDTO
 import ecommerce.repositories.MemberRepository
 import ecommerce.repositories.ProductRepository
-import ecommerce.services.CartItemService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional
 @SpringBootTest
 class CartItemServiceTest {
     @Autowired
-    private lateinit var cartItemService: CartItemService
+    private lateinit var cartItemService: ManageCartItemUseCase
 
     @Autowired
     private lateinit var productRepository: ProductRepository

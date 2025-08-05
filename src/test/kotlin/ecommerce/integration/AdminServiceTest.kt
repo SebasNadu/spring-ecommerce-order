@@ -1,13 +1,14 @@
 package ecommerce.integration
 
+import ecommerce.controller.admin.usecase.FindMembersWithRecentCartActivityUseCase
+import ecommerce.controller.admin.usecase.FindTopProductsUseCase
 import ecommerce.entities.Member
 import ecommerce.entities.Product
 import ecommerce.model.CartItemRequestDTO
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.MemberRepository
 import ecommerce.repositories.ProductRepository
-import ecommerce.services.AdminServiceImpl
-import ecommerce.services.CartItemServiceImpl
+import ecommerce.services.cart.CartItemServiceImpl
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -19,7 +20,10 @@ import org.springframework.boot.test.context.SpringBootTest
 @Transactional
 class AdminServiceTest {
     @Autowired
-    private lateinit var adminService: AdminServiceImpl
+    private lateinit var findTopProductsUseCase: FindTopProductsUseCase
+
+    @Autowired
+    private lateinit var findMembersWithRecentCartActivityUseCase: FindMembersWithRecentCartActivityUseCase
 
     @Autowired
     private lateinit var cartItemService: CartItemServiceImpl
@@ -57,7 +61,7 @@ class AdminServiceTest {
 
     @Test
     fun `findTopProductsAddedInList30Days returns top products`() {
-        val result = adminService.findTopProductsAddedInList30Days()
+        val result = findTopProductsUseCase.findProducts()
 
         assertThat(result).isNotEmpty
         assertThat(result.map { it.name }).contains("Mouse", "Keyboard")
@@ -65,7 +69,7 @@ class AdminServiceTest {
 
     @Test
     fun `findMembersWithRecentCartActivity returns distinct members`() {
-        val result = adminService.findMembersWithRecentCartActivity()
+        val result = findMembersWithRecentCartActivityUseCase.findMembers()
 
         assertThat(result.map { it.email }).containsExactlyInAnyOrder("m1@example.com", "m2@example.com")
     }

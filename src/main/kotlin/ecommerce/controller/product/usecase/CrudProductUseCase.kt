@@ -1,4 +1,4 @@
-package ecommerce.services
+package ecommerce.controller.product.usecase
 
 import ecommerce.model.ProductPatchDTO
 import ecommerce.model.ProductRequestDTO
@@ -6,7 +6,7 @@ import ecommerce.model.ProductResponseDTO
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
-interface ProductService {
+interface CrudProductUseCase {
     fun findAll(pageable: Pageable): Page<ProductResponseDTO>
 
     fun findById(id: Long): ProductResponseDTO

@@ -1,12 +1,12 @@
-package ecommerce.controller
+package ecommerce.controller.member
 
+import ecommerce.controller.member.usecase.AuthUseCase
+import ecommerce.controller.member.usecase.CrudMemberUseCase
 import ecommerce.infrastructure.AuthorizationExtractor
 import ecommerce.model.MemberDTO
 import ecommerce.model.MemberRegisterDTO
 import ecommerce.model.TokenRequestDTO
 import ecommerce.model.TokenResponseDTO
-import ecommerce.services.AuthService
-import ecommerce.services.MemberService
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/members")
 class MemberController(
-    private val authService: AuthService,
+    private val authService: AuthUseCase,
     private val authorizationExtractor: AuthorizationExtractor,
-    private val memberService: MemberService,
+    private val memberService: CrudMemberUseCase,
 ) {
     @PostMapping("/register")
     fun register(

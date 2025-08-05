@@ -1,5 +1,8 @@
-package ecommerce.services
+package ecommerce.services.admin
 
+import ecommerce.controller.admin.usecase.CreateOptionUseCase
+import ecommerce.controller.admin.usecase.FindMembersWithRecentCartActivityUseCase
+import ecommerce.controller.admin.usecase.FindTopProductsUseCase
 import ecommerce.exception.NoSuchElementException
 import ecommerce.mappers.toEntity
 import ecommerce.model.ActiveMemberDTO
@@ -7,29 +10,27 @@ import ecommerce.model.OptionDTO
 import ecommerce.model.TopProductDTO
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.ProductRepository
-import org.springframework.context.annotation.Primary
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-@Primary
 class AdminServiceImpl(
     private val cartItemRepository: CartItemRepository,
     private val productRepository: ProductRepository,
-) : AdminService {
+) : FindTopProductsUseCase, FindMembersWithRecentCartActivityUseCase, CreateOptionUseCase {
     @Transactional(readOnly = true)
-    override fun findTopProductsAddedInList30Days(): List<TopProductDTO> {
+    override fun findProducts(): List<TopProductDTO> {
         return cartItemRepository.findTop5ProductsAddedInLast30Days()
     }
 
     @Transactional(readOnly = true)
-    override fun findMembersWithRecentCartActivity(): List<ActiveMemberDTO> {
+    override fun findMembers(): List<ActiveMemberDTO> {
         return cartItemRepository.findDistinctMembersWithCartActivityInLast7Days()
     }
 
     @Transactional
-    override fun createOption(optionDTO: OptionDTO) {
+    override fun create(optionDTO: OptionDTO) {
         val product =
             productRepository.findByIdOrNull(optionDTO.productId!!)
                 ?: throw NoSuchElementException("Product with id ${optionDTO.productId} doesn't exist")

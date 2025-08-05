@@ -1,5 +1,7 @@
-package ecommerce.services
+package ecommerce.services.wish
 
+import ecommerce.controller.member.usecase.CrudMemberUseCase
+import ecommerce.controller.wish.usecase.CrudWishItemUseCase
 import ecommerce.entities.WishItem
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
@@ -20,8 +22,8 @@ import java.time.LocalDateTime
 class WishItemServiceImpl(
     private val wishItemRepository: WishItemRepository,
     private val productRepository: ProductRepository,
-    private val memberService: MemberService,
-) : WishItemService {
+    private val memberService: CrudMemberUseCase,
+) : CrudWishItemUseCase {
     @Transactional
     override fun save(
         wishItemRequestDTO: WishItemRequestDTO,

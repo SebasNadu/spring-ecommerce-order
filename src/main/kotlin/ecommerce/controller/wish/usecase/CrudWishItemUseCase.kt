@@ -1,11 +1,11 @@
-package ecommerce.services
+package ecommerce.controller.wish.usecase
 
 import ecommerce.model.WishItemRequestDTO
 import ecommerce.model.WishItemResponseDTO
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
-interface WishItemService {
+interface CrudWishItemUseCase {
     fun save(
         wishItemRequestDTO: WishItemRequestDTO,
         memberId: Long,

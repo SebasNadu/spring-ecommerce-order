@@ -1,9 +1,9 @@
-package ecommerce.controller
+package ecommerce.controller.product
 
 import ecommerce.annotation.IgnoreCheckLogin
+import ecommerce.controller.product.usecase.CrudProductUseCase
 import ecommerce.model.ProductRequestDTO
 import ecommerce.model.ProductResponseDTO
-import ecommerce.services.ProductService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
-class ProductViewController(private val productService: ProductService) {
+class ProductViewController(private val productService: CrudProductUseCase) {
     @IgnoreCheckLogin
     @GetMapping
     fun showProducts(

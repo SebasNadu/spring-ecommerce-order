@@ -1,5 +1,7 @@
-package ecommerce.services
+package ecommerce.services.cart
 
+import ecommerce.controller.cart.usecase.ManageCartItemUseCase
+import ecommerce.controller.member.usecase.CrudMemberUseCase
 import ecommerce.entities.CartItem
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
@@ -18,8 +20,8 @@ import java.time.LocalDateTime
 class CartItemServiceImpl(
     private val cartItemRepository: CartItemRepository,
     private val productRepository: ProductRepository,
-    private val memberService: MemberService,
-) : CartItemService {
+    private val memberService: CrudMemberUseCase,
+) : ManageCartItemUseCase {
     @Transactional
     override fun addOrUpdate(
         cartItemRequestDTO: CartItemRequestDTO,

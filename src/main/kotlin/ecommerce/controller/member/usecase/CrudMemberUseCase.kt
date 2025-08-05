@@ -1,9 +1,9 @@
-package ecommerce.services
+package ecommerce.controller.member.usecase
 
 import ecommerce.model.MemberDTO
 import ecommerce.model.MemberRegisterDTO
 
-interface MemberService {
+interface CrudMemberUseCase {
     fun findAll(): List<MemberDTO>
 
     fun findById(id: Long): MemberDTO
@@ -12,7 +12,7 @@ interface MemberService {
 
     fun save(memberRegisterDTO: MemberRegisterDTO): MemberDTO
 
-    fun validateEmailUniqueness(email: String)
-
     fun deleteAll()
+
+    fun validateEmailUniqueness(email: String)
 }

@@ -4,7 +4,7 @@ import ecommerce.entities.Member
 import ecommerce.exception.OperationFailedException
 import ecommerce.model.MemberRegisterDTO
 import ecommerce.repositories.MemberRepository
-import ecommerce.services.MemberServiceImpl
+import ecommerce.services.member.MemberServiceImpl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -37,7 +37,7 @@ class MemberServiceTest {
     fun `findById should return matching member`() {
         val saved = memberRepository.save(Member(name = "c", email = "c@c.com", password = "pass", role = Member.Role.ADMIN))!!
 
-        val found = memberService.findById(saved.id!!)
+        val found = memberService.findById(saved.id)
 
         assertThat(found.email).isEqualTo("c@c.com")
     }

@@ -1,11 +1,11 @@
-package ecommerce.controller
+package ecommerce.controller.product
 
 import ecommerce.annotation.CheckAdminOnly
 import ecommerce.annotation.IgnoreCheckLogin
+import ecommerce.controller.product.usecase.CrudProductUseCase
 import ecommerce.model.ProductPatchDTO
 import ecommerce.model.ProductRequestDTO
 import ecommerce.model.ProductResponseDTO
-import ecommerce.services.ProductService
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
 @RestController
-class ProductController(private val productService: ProductService) {
+class ProductController(private val productService: CrudProductUseCase) {
     @IgnoreCheckLogin
     @GetMapping(PRODUCT_PATH)
     fun getProducts(

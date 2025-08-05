@@ -1,5 +1,6 @@
-package ecommerce.services
+package ecommerce.services.product
 
+import ecommerce.controller.product.usecase.CrudProductUseCase
 import ecommerce.exception.NotFoundException
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional
 @Primary
 class ProductServiceImpl(
     private val productRepository: ProductRepository,
-) : ProductService {
+) : CrudProductUseCase {
     @Transactional(readOnly = true)
     override fun findAll(pageable: Pageable): Page<ProductResponseDTO> {
         val products = productRepository.findAll(pageable)
