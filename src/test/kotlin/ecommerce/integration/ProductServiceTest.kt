@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 @SpringBootTest
 class ProductServiceTest(
-    @Autowired val productService: CrudProductUseCase,
+    @param:Autowired val productService: CrudProductUseCase,
 ) {
     private lateinit var product: ProductRequestDTO
 
@@ -105,18 +105,14 @@ class ProductServiceTest(
         assertThat(all).hasSize(27)
     }
 
-    // TODO: Replace with the new pagination behaviour
-//    @Test
-//    fun `should return paginated products`() {
-//        repeat(10) {
-//            productService.save(product.copy(name = "Product $it"))
-//        }
-//
-//        val (items, total) = productService.findAllPaginated(page = 1, size = 4)
-//
-//        assertThat(items).hasSize(4)
-//        assertThat(total).isEqualTo(35)
-//    }
+    @Test
+    fun `should return paginated products`() {
+        val pageable = PageRequest.of(0, 4) // page index is 0-based
+        val page = productService.findAll(pageable)
+
+        assertThat(page.content).hasSize(4)
+        assertThat(page.totalElements).isEqualTo(25)
+    }
 
     @Test
     fun `should delete product by id`() {
