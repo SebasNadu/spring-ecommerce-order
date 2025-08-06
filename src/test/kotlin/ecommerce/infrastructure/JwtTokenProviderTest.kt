@@ -1,5 +1,6 @@
 package ecommerce.infrastructure
 
+import ecommerce.config.security.JwtProperties
 import ecommerce.entities.MemberEntity
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -14,7 +15,8 @@ class JwtTokenProviderTest {
 
     @BeforeEach
     fun setup() {
-        jwtTokenProvider = JwtTokenProvider(secretKey, expirationTime)
+        val props = JwtProperties(secretKey, expirationTime)
+        jwtTokenProvider = JwtTokenProvider(props)
     }
 
     @Test
@@ -44,7 +46,9 @@ class JwtTokenProviderTest {
 
     @Test
     fun `should return false for expired token`() {
-        val shortLivedProvider = JwtTokenProvider(secretKey, 1) // 1 ms
+        val props = JwtProperties(secretKey, 1)
+
+        val shortLivedProvider = JwtTokenProvider(props) // 1 ms
         val token = shortLivedProvider.createToken("expired", MemberEntity.Role.CUSTOMER)
         Thread.sleep(5)
 

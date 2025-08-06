@@ -23,6 +23,7 @@ repositories {
 val assureVersion = "5.5.5"
 val h2Version = "2.2.224"
 val jwtVersion = "0.12.6"
+val dotenvVersion = "6.5.1"
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -31,6 +32,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("io.jsonwebtoken:jjwt-api:$jwtVersion")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("io.github.cdimascio:dotenv-kotlin:${dotenvVersion}")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:$jwtVersion")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jwtVersion")
     runtimeOnly("com.h2database:h2:$h2Version")

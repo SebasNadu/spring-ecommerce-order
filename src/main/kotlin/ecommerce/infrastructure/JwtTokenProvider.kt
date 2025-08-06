@@ -1,5 +1,6 @@
 package ecommerce.infrastructure
 
+import ecommerce.config.security.JwtProperties
 import ecommerce.entities.MemberEntity
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
@@ -12,13 +13,11 @@ import javax.crypto.SecretKey
 
 @Component
 class JwtTokenProvider(
-    @Value("\${security.jwt.token.secret-key}")
-    secret: String,
-    @Value("\${security.jwt.token.expire-length}")
-    private val validityInMs: Long,
+    private val props: JwtProperties
 ) {
     private val secretKey: SecretKey =
-        Keys.hmacShaKeyFor(secret.toByteArray(StandardCharsets.UTF_8))
+        Keys.hmacShaKeyFor(props.secretKey.toByteArray(StandardCharsets.UTF_8))
+    private val validityInMs = props.expireLength
 
     fun createToken(
         payload: String,
