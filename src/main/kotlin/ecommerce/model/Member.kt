@@ -1,6 +1,6 @@
 package ecommerce.model
 
-import ecommerce.entities.Member
+import ecommerce.entities.MemberEntity
 import ecommerce.util.ValidationMessages.EMAIL_BLANK
 import ecommerce.util.ValidationMessages.EMAIL_INVALID
 import ecommerce.util.ValidationMessages.EMAIL_SIZE
@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
-data class MemberDTO(
+data class Member(
     @field:NotBlank(message = MEMBER_NAME_REQUIRED)
     @field:Size(min = 1, max = 50, message = MEMBER_NAME_SIZE)
     var name: String,
@@ -23,6 +23,9 @@ data class MemberDTO(
     @field:NotBlank(message = PASSWORD_BLANK)
     @field:Size(min = 1, max = 255, message = PASSWORD_SIZE)
     var password: String,
-    var role: Member.Role = Member.Role.CUSTOMER,
+    var role: MemberEntity.Role = MemberEntity.Role.CUSTOMER,
     var id: Long = 0L,
-)
+) {
+    fun validatePassword(password: String): Boolean = this.password == password
+    fun validateEmail(email: String): Boolean = this.email == email
+}

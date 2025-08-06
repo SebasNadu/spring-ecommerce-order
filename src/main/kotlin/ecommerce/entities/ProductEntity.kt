@@ -2,9 +2,9 @@ package ecommerce.entities
 
 import ecommerce.exception.InvalidOptionNameException
 import ecommerce.mappers.toEntity
-import ecommerce.model.OptionDTO
-import ecommerce.model.ProductPatchDTO
-import ecommerce.model.ProductRequestDTO
+import ecommerce.dto.OptionDTO
+import ecommerce.dto.ProductPatchDTO
+import ecommerce.dto.ProductRequestDTO
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -16,7 +16,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "product")
-class Product(
+class ProductEntity(
     @Column(name = "name", nullable = false, length = 15)
     var name: String,
     @Column(name = "price", nullable = false)
@@ -24,21 +24,21 @@ class Product(
     @Column(name = "image_url", nullable = false, length = 255)
     var imageUrl: String,
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val cartItems: MutableSet<CartItem> = mutableSetOf(),
+    val cartItems: MutableSet<CartItemEntity> = mutableSetOf(),
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
-    private val _options: MutableSet<Option> = mutableSetOf(),
+    private val _options: MutableSet<OptionEntity> = mutableSetOf(),
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
 ) {
-    var options: List<Option>
+    var options: List<OptionEntity>
         get() = _options.toList()
         set(value) {
             _options.clear()
             _options.addAll(value)
         }
 
-    fun addOption(option: Option) {
+    fun addOption(option: OptionEntity) {
         if (_options.any { it.name == option.name }) {
             throw InvalidOptionNameException("Option with name '${option.name}' already exists")
         }
@@ -67,7 +67,7 @@ class Product(
         }
     }
 
-    private fun mapOptionDTOs(optionDTOs: Set<OptionDTO>): List<Option> {
+    private fun mapOptionDTOs(optionDTOs: Set<OptionDTO>): List<OptionEntity> {
         return optionDTOs.map { dto ->
             _options.find { it.id == dto.id }?.apply {
                 name = dto.name
@@ -78,7 +78,7 @@ class Product(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is Product) return false
+        if (other !is ProductEntity) return false
         return id != 0L && id == other.id
     }
 

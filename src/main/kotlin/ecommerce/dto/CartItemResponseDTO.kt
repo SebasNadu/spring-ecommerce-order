@@ -1,10 +1,12 @@
-package ecommerce.model
+package ecommerce.dto
 
 import java.time.LocalDateTime
 
-data class WishItemResponseDTO(
+data class CartItemResponseDTO(
     val id: Long,
     val memberId: Long,
     val product: ProductResponseDTO,
+    val quantity: Int,
     val addedAt: LocalDateTime,
 )
+

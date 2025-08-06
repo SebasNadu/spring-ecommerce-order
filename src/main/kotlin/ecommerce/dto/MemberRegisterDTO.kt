@@ -1,4 +1,4 @@
-package ecommerce.model
+package ecommerce.dto
 
 import ecommerce.util.ValidationMessages.EMAIL_BLANK
 import ecommerce.util.ValidationMessages.EMAIL_INVALID

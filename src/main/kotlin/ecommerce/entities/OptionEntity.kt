@@ -19,12 +19,12 @@ import jakarta.persistence.UniqueConstraint
     name = "`option`",
     uniqueConstraints = [UniqueConstraint(columnNames = ["product_id", "name"])],
 )
-class Option(
+class OptionEntity(
     name: String,
     quantity: Long,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
-    var product: Product,
+    var product: ProductEntity,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
@@ -56,7 +56,7 @@ class Option(
 
     override fun equals(other: Any?): Boolean {
         if (this == other) return true
-        if (other !is Option) return false
+        if (other !is OptionEntity) return false
         return product == other.product && name == other.name
     }
 

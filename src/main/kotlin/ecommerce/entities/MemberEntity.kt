@@ -13,7 +13,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "member")
-class Member(
+class MemberEntity(
     @Column(name = "name", nullable = false, length = 50)
     val name: String,
     @Column(name = "email", nullable = false, length = 100)
@@ -24,9 +24,9 @@ class Member(
     @Column(name = "role", nullable = false, length = 20)
     val role: Role = Role.CUSTOMER,
     @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val cartItems: MutableSet<CartItem> = mutableSetOf(),
+    val cartItems: MutableSet<CartItemEntity> = mutableSetOf(),
     @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val wishItems: MutableSet<WishItem> = mutableSetOf(),
+    val wishItems: MutableSet<WishItemEntity> = mutableSetOf(),
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
@@ -35,7 +35,7 @@ class Member(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is Member) return false
+        if (other !is MemberEntity) return false
         if (id == 0L || other.id == 0L) return false
         return id == other.id
     }

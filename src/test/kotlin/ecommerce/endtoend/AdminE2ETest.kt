@@ -1,9 +1,9 @@
 package ecommerce.endtoend
 
-import ecommerce.model.ActiveMemberDTO
-import ecommerce.model.OptionDTO
-import ecommerce.model.ProductResponseDTO
-import ecommerce.model.TopProductDTO
+import ecommerce.dto.ActiveMemberDTO
+import ecommerce.dto.OptionDTO
+import ecommerce.dto.ProductResponseDTO
+import ecommerce.dto.TopProductDTO
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import jakarta.transaction.Transactional
