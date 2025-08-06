@@ -24,8 +24,6 @@ class ProductEntity(
     @Column(name = "image_url", nullable = false, length = 255)
     var imageUrl: String,
     @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val cartItems: MutableSet<CartItemEntity> = mutableSetOf(),
-    @OneToMany(mappedBy = "product", cascade = [CascadeType.ALL], orphanRemoval = true)
     private val _options: MutableSet<OptionEntity> = mutableSetOf(),
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
