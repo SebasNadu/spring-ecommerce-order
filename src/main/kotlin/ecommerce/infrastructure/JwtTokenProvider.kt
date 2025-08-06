@@ -1,6 +1,6 @@
 package ecommerce.infrastructure
 
-import ecommerce.entities.Member
+import ecommerce.entities.MemberEntity
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
@@ -22,7 +22,7 @@ class JwtTokenProvider(
 
     fun createToken(
         payload: String,
-        role: Member.Role,
+        role: MemberEntity.Role,
     ): String {
         val now = Date()
         val exp = Date(now.time + validityInMs)
@@ -35,7 +35,7 @@ class JwtTokenProvider(
             .compact()
     }
 
-    fun getPayload(token: String): Pair<String, Member.Role> {
+    fun getPayload(token: String): Pair<String, MemberEntity.Role> {
         val claims =
             Jwts.parser()
                 .verifyWith(secretKey)
@@ -43,7 +43,7 @@ class JwtTokenProvider(
                 .parseSignedClaims(token)
                 .payload
         val subject = claims.subject
-        val role = Member.Role.valueOf(claims["role"] as String)
+        val role = MemberEntity.Role.valueOf(claims["role"] as String)
 
         return Pair(subject, role)
     }

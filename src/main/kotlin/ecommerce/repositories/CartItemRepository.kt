@@ -1,13 +1,13 @@
 package ecommerce.repositories
 
-import ecommerce.entities.CartItem
-import ecommerce.model.ActiveMemberDTO
-import ecommerce.model.TopProductDTO
+import ecommerce.entities.CartItemEntity
+import ecommerce.dto.ActiveMemberDTO
+import ecommerce.dto.TopProductDTO
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
-interface CartItemRepository : JpaRepository<CartItem, Long> {
-    fun findByMemberId(memberId: Long): List<CartItem>
+interface CartItemRepository : JpaRepository<CartItemEntity, Long> {
+    fun findByMemberId(memberId: Long): List<CartItemEntity>
 
     fun existsByProductIdAndMemberId(
         productId: Long,
@@ -17,7 +17,7 @@ interface CartItemRepository : JpaRepository<CartItem, Long> {
     fun findByProductIdAndMemberId(
         productId: Long,
         memberId: Long,
-    ): CartItem?
+    ): CartItemEntity?
 
     fun deleteByProductIdAndMemberId(
         productId: Long,

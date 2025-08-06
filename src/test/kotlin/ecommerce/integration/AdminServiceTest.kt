@@ -2,9 +2,9 @@ package ecommerce.integration
 
 import ecommerce.controller.admin.usecase.FindMembersWithRecentCartActivityUseCase
 import ecommerce.controller.admin.usecase.FindTopProductsUseCase
-import ecommerce.entities.Member
-import ecommerce.entities.Product
-import ecommerce.model.CartItemRequestDTO
+import ecommerce.entities.MemberEntity
+import ecommerce.entities.ProductEntity
+import ecommerce.dto.CartItemRequestDTO
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.MemberRepository
 import ecommerce.repositories.ProductRepository
@@ -37,10 +37,10 @@ class AdminServiceTest {
     @Autowired
     private lateinit var cartItemRepository: CartItemRepository
 
-    private lateinit var member1: Member
-    private lateinit var member2: Member
-    private lateinit var product1: Product
-    private lateinit var product2: Product
+    private lateinit var member1: MemberEntity
+    private lateinit var member2: MemberEntity
+    private lateinit var product1: ProductEntity
+    private lateinit var product2: ProductEntity
 
     @BeforeEach
     fun setup() {
@@ -48,11 +48,11 @@ class AdminServiceTest {
         memberRepository.deleteAll()
         productRepository.deleteAll()
 
-        member1 = memberRepository.save(Member(name = "m1", email = "m1@example.com", password = "pw"))!!
-        member2 = memberRepository.save(Member(name = "m2", email = "m2@example.com", password = "pw"))!!
+        member1 = memberRepository.save(MemberEntity(name = "m1", email = "m1@example.com", password = "pw"))!!
+        member2 = memberRepository.save(MemberEntity(name = "m2", email = "m2@example.com", password = "pw"))!!
 
-        product1 = productRepository.save(Product(name = "Mouse", price = 10.0, imageUrl = "mouse.jpg"))
-        product2 = productRepository.save(Product(name = "Keyboard", price = 20.0, imageUrl = "keyboard.jpg"))
+        product1 = productRepository.save(ProductEntity(name = "Mouse", price = 10.0, imageUrl = "mouse.jpg"))
+        product2 = productRepository.save(ProductEntity(name = "Keyboard", price = 20.0, imageUrl = "keyboard.jpg"))
 
         cartItemService.addOrUpdate(CartItemRequestDTO(product1.id, 1), member1.id)
         cartItemService.addOrUpdate(CartItemRequestDTO(product2.id, 2), member1.id)

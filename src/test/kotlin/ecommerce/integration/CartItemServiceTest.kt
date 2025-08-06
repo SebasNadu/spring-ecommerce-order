@@ -1,9 +1,9 @@
 package ecommerce.integration
 
 import ecommerce.controller.cart.usecase.ManageCartItemUseCase
-import ecommerce.entities.Product
+import ecommerce.entities.ProductEntity
 import ecommerce.mappers.toDTO
-import ecommerce.model.CartItemRequestDTO
+import ecommerce.dto.CartItemRequestDTO
 import ecommerce.repositories.MemberRepository
 import ecommerce.repositories.ProductRepository
 import org.assertj.core.api.Assertions.assertThat
@@ -34,7 +34,7 @@ class CartItemServiceTest {
     @BeforeEach
     fun setup() {
         val product =
-            Product(
+            ProductEntity(
                 name = "Keyboard",
                 price = 50.0,
                 imageUrl = "keyboard.png",
