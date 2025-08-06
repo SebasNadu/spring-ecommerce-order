@@ -1,9 +1,9 @@
 package ecommerce.integration
 
 import ecommerce.controller.cart.usecase.ManageCartItemUseCase
+import ecommerce.dto.CartItemRequestDTO
 import ecommerce.entities.ProductEntity
 import ecommerce.mappers.toDTO
-import ecommerce.dto.CartItemRequestDTO
 import ecommerce.repositories.MemberRepository
 import ecommerce.repositories.ProductRepository
 import org.assertj.core.api.Assertions.assertThat

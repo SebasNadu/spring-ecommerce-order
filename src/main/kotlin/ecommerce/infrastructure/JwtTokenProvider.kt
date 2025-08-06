@@ -5,7 +5,6 @@ import ecommerce.entities.MemberEntity
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
 import java.util.Date
@@ -13,7 +12,7 @@ import javax.crypto.SecretKey
 
 @Component
 class JwtTokenProvider(
-    private val props: JwtProperties
+    private val props: JwtProperties,
 ) {
     private val secretKey: SecretKey =
         Keys.hmacShaKeyFor(props.secretKey.toByteArray(StandardCharsets.UTF_8))

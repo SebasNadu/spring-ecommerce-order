@@ -1,13 +1,13 @@
 package ecommerce.services.product
 
 import ecommerce.controller.product.usecase.CrudProductUseCase
+import ecommerce.dto.ProductPatchDTO
+import ecommerce.dto.ProductRequestDTO
+import ecommerce.dto.ProductResponseDTO
 import ecommerce.exception.NotFoundException
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
-import ecommerce.dto.ProductPatchDTO
-import ecommerce.dto.ProductRequestDTO
-import ecommerce.dto.ProductResponseDTO
 import ecommerce.repositories.ProductRepository
 import org.springframework.context.annotation.Primary
 import org.springframework.data.domain.Page

@@ -2,11 +2,11 @@ package ecommerce.controller.member
 
 import ecommerce.controller.member.usecase.AuthUseCase
 import ecommerce.controller.member.usecase.CrudMemberUseCase
-import ecommerce.infrastructure.AuthorizationExtractor
-import ecommerce.model.Member
 import ecommerce.dto.MemberRegisterDTO
 import ecommerce.dto.TokenRequestDTO
 import ecommerce.dto.TokenResponseDTO
+import ecommerce.infrastructure.AuthorizationExtractor
+import ecommerce.model.Member
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

@@ -27,5 +27,6 @@ data class Member(
     var id: Long = 0L,
 ) {
     fun validatePassword(password: String): Boolean = this.password == password
+
     fun validateEmail(email: String): Boolean = this.email == email
 }

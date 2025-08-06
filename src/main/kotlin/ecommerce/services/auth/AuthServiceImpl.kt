@@ -1,12 +1,12 @@
 package ecommerce.services.auth
 
 import ecommerce.controller.member.usecase.AuthUseCase
-import ecommerce.exception.ForbiddenException
-import ecommerce.infrastructure.JwtTokenProvider
-import ecommerce.model.Member
 import ecommerce.dto.TokenRequestDTO
 import ecommerce.dto.TokenResponseDTO
+import ecommerce.exception.ForbiddenException
+import ecommerce.infrastructure.JwtTokenProvider
 import ecommerce.mappers.toDTO
+import ecommerce.model.Member
 import ecommerce.repositories.MemberRepository
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.stereotype.Service
@@ -40,9 +40,9 @@ class AuthServiceImpl(private val jwtTokenProvider: JwtTokenProvider, private va
     }
 
     private fun findMemberByEmail(email: String): Member {
-        return memberRepository.findByEmail(email)?.toDTO() ?:throw EmptyResultDataAccessException(
+        return memberRepository.findByEmail(email)?.toDTO() ?: throw EmptyResultDataAccessException(
             "Member with Email $email not found",
-            1
+            1,
         )
     }
 }

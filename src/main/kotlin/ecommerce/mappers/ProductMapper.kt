@@ -1,8 +1,8 @@
 package ecommerce.mappers
 
-import ecommerce.entities.ProductEntity
 import ecommerce.dto.ProductRequestDTO
 import ecommerce.dto.ProductResponseDTO
+import ecommerce.entities.ProductEntity
 
 fun ProductEntity.toDTO(): ProductResponseDTO = ProductResponseDTO(id, name, price, imageUrl, options = options.map { it.toDTO() })
 

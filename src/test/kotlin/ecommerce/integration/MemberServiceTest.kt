@@ -1,8 +1,8 @@
 package ecommerce.integration
 
+import ecommerce.dto.MemberRegisterDTO
 import ecommerce.entities.MemberEntity
 import ecommerce.exception.OperationFailedException
-import ecommerce.dto.MemberRegisterDTO
 import ecommerce.repositories.MemberRepository
 import ecommerce.services.member.MemberServiceImpl
 import org.assertj.core.api.Assertions.assertThat

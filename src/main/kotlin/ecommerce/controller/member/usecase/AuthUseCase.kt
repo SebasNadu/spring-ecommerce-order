@@ -1,8 +1,8 @@
 package ecommerce.controller.member.usecase
 
-import ecommerce.model.Member
 import ecommerce.dto.TokenRequestDTO
 import ecommerce.dto.TokenResponseDTO
+import ecommerce.model.Member
 
 interface AuthUseCase {
     fun login(tokenRequestDTO: TokenRequestDTO): TokenResponseDTO

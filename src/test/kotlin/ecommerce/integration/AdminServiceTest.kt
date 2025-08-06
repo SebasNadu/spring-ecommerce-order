@@ -2,9 +2,9 @@ package ecommerce.integration
 
 import ecommerce.controller.admin.usecase.FindMembersWithRecentCartActivityUseCase
 import ecommerce.controller.admin.usecase.FindTopProductsUseCase
+import ecommerce.dto.CartItemRequestDTO
 import ecommerce.entities.MemberEntity
 import ecommerce.entities.ProductEntity
-import ecommerce.dto.CartItemRequestDTO
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.MemberRepository
 import ecommerce.repositories.ProductRepository

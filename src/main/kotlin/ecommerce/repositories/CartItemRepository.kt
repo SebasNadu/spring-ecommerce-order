@@ -1,8 +1,8 @@
 package ecommerce.repositories
 
-import ecommerce.entities.CartItemEntity
 import ecommerce.dto.ActiveMemberDTO
 import ecommerce.dto.TopProductDTO
+import ecommerce.entities.CartItemEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 

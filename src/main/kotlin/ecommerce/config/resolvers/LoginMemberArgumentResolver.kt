@@ -33,8 +33,7 @@ class LoginMemberArgumentResolver(
                 ?: throw AuthorizationException("Email attribute missing")
         return memberRepository.findByEmail(email)?.toDTO()?.toLoginDTO() ?: throw EmptyResultDataAccessException(
             "Member with Email $email not found",
-            1
+            1,
         )
-
     }
 }

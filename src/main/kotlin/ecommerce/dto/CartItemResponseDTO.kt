@@ -9,4 +9,3 @@ data class CartItemResponseDTO(
     val quantity: Int,
     val addedAt: LocalDateTime,
 )
-
