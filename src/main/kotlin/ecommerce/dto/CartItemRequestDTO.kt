@@ -6,7 +6,7 @@ import jakarta.validation.constraints.PositiveOrZero
 
 data class CartItemRequestDTO(
     @field:Positive(message = ValidationMessages.ID_REQUIRED)
-    val productId: Long,
-    @field:PositiveOrZero(message = ValidationMessages.QUANTITY_NON_NEGATIVE)
+    val optionId: Long,
+    @field:Positive(message = ValidationMessages.QUANTITY_NON_NEGATIVE)
     val quantity: Int,
 )
