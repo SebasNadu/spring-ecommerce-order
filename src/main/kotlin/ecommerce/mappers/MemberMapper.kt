@@ -1,9 +1,9 @@
 package ecommerce.mappers
 
-import ecommerce.entities.MemberEntity
-import ecommerce.model.Member
 import ecommerce.dto.MemberLoginDTO
 import ecommerce.dto.MemberRegisterDTO
+import ecommerce.entities.MemberEntity
+import ecommerce.model.Member
 
 fun MemberEntity.toDTO() = Member(name, email, password, role, id)
 

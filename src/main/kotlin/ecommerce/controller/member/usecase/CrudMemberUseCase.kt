@@ -4,7 +4,6 @@ import ecommerce.dto.MemberRegisterDTO
 import ecommerce.model.Member
 
 interface CrudMemberUseCase {
-
     fun findAll(): List<Member>
 
     fun findById(id: Long): Member

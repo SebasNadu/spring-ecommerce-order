@@ -1,7 +1,7 @@
 package ecommerce.endtoend
 
-import ecommerce.model.Member
 import ecommerce.dto.TokenResponseDTO
+import ecommerce.model.Member
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.assertj.core.api.Assertions.assertThat

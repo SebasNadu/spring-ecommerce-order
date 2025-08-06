@@ -1,10 +1,10 @@
 package ecommerce.entities
 
-import ecommerce.exception.InvalidOptionNameException
-import ecommerce.mappers.toEntity
 import ecommerce.dto.OptionDTO
 import ecommerce.dto.ProductPatchDTO
 import ecommerce.dto.ProductRequestDTO
+import ecommerce.exception.InvalidOptionNameException
+import ecommerce.mappers.toEntity
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

@@ -2,12 +2,12 @@ package ecommerce.services.cart
 
 import ecommerce.controller.cart.usecase.ManageCartItemUseCase
 import ecommerce.controller.member.usecase.CrudMemberUseCase
+import ecommerce.dto.CartItemRequestDTO
+import ecommerce.dto.CartItemResponseDTO
 import ecommerce.entities.CartItemEntity
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
-import ecommerce.dto.CartItemRequestDTO
-import ecommerce.dto.CartItemResponseDTO
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.ProductRepository
 import org.springframework.dao.EmptyResultDataAccessException

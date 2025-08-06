@@ -7,11 +7,15 @@ import org.springframework.core.env.ConfigurableEnvironment
 import org.springframework.core.env.MapPropertySource
 
 class DotenvEnvironmentPostProcessor : EnvironmentPostProcessor {
-    override fun postProcessEnvironment(env: ConfigurableEnvironment, app: SpringApplication) {
-        val dotenv = dotenv {
-            directory = "."
-            ignoreIfMissing = true
-        }
+    override fun postProcessEnvironment(
+        env: ConfigurableEnvironment,
+        app: SpringApplication,
+    ) {
+        val dotenv =
+            dotenv {
+                directory = "."
+                ignoreIfMissing = true
+            }
 
         val props = dotenv.entries().associate { it.key to it.value }
         env.propertySources.addFirst(MapPropertySource("dotenv", props))

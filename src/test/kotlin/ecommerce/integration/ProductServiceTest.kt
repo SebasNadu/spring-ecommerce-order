@@ -1,9 +1,9 @@
 package ecommerce.integration
 
 import ecommerce.controller.product.usecase.CrudProductUseCase
-import ecommerce.exception.NotFoundException
 import ecommerce.dto.ProductPatchDTO
 import ecommerce.dto.ProductRequestDTO
+import ecommerce.exception.NotFoundException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

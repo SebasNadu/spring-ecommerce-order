@@ -1,11 +1,11 @@
 package ecommerce.services.member
 
 import ecommerce.controller.member.usecase.CrudMemberUseCase
+import ecommerce.dto.MemberRegisterDTO
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
 import ecommerce.model.Member
-import ecommerce.dto.MemberRegisterDTO
 import ecommerce.repositories.MemberRepository
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.data.repository.findByIdOrNull
