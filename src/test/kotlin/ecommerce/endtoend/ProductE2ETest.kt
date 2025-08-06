@@ -1,9 +1,9 @@
 package ecommerce.endtoend
 
-import ecommerce.model.OptionDTO
-import ecommerce.model.PageResponseDTO
-import ecommerce.model.ProductRequestDTO
-import ecommerce.model.ProductResponseDTO
+import ecommerce.dto.OptionDTO
+import ecommerce.dto.PageResponseDTO
+import ecommerce.dto.ProductRequestDTO
+import ecommerce.dto.ProductResponseDTO
 import io.restassured.RestAssured
 import io.restassured.common.mapper.TypeRef
 import io.restassured.http.ContentType

@@ -1,16 +1,17 @@
 package ecommerce.controller.member.usecase
 
-import ecommerce.model.MemberDTO
-import ecommerce.model.MemberRegisterDTO
+import ecommerce.dto.MemberRegisterDTO
+import ecommerce.model.Member
 
 interface CrudMemberUseCase {
-    fun findAll(): List<MemberDTO>
 
-    fun findById(id: Long): MemberDTO
+    fun findAll(): List<Member>
 
-    fun findByEmail(email: String): MemberDTO
+    fun findById(id: Long): Member
 
-    fun save(memberRegisterDTO: MemberRegisterDTO): MemberDTO
+    fun findByEmail(email: String): Member
+
+    fun save(memberRegisterDTO: MemberRegisterDTO): Member
 
     fun deleteAll()
 

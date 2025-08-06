@@ -1,9 +1,9 @@
 package ecommerce.mappers
 
-import ecommerce.entities.Option
-import ecommerce.entities.Product
-import ecommerce.model.OptionDTO
+import ecommerce.entities.OptionEntity
+import ecommerce.entities.ProductEntity
+import ecommerce.dto.OptionDTO
 
-fun Option.toDTO(): OptionDTO = OptionDTO(name, quantity, product.id, id)
+fun OptionEntity.toDTO(): OptionDTO = OptionDTO(name, quantity, product.id, id)
 
-fun OptionDTO.toEntity(product: Product): Option = Option(name, quantity, product, id)
+fun OptionDTO.toEntity(product: ProductEntity): OptionEntity = OptionEntity(name, quantity, product, id)

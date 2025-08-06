@@ -1,3 +1,3 @@
-package ecommerce.model
+package ecommerce.dto
 
 data class TokenResponseDTO(val accessToken: String)

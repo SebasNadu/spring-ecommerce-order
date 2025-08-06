@@ -1,4 +1,4 @@
-package ecommerce.model
+package ecommerce.dto
 
 data class PageResponseDTO<T>(
     val content: List<T>,

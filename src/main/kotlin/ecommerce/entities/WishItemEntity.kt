@@ -14,27 +14,25 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(
-    name = "cart_item",
+    name = "wish_item",
     uniqueConstraints = [UniqueConstraint(columnNames = ["member_id", "product_id"])],
 )
-class CartItem(
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "member_id", nullable = false)
-    val member: Member,
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
-    val product: Product,
-    @Column(name = "quantity", nullable = false)
-    var quantity: Int,
+class WishItemEntity(
     @Column(name = "added_at", nullable = false)
     val addedAt: LocalDateTime,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    val member: MemberEntity,
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", nullable = false)
+    val product: ProductEntity,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is CartItem) return false
+        if (other !is WishItemEntity) return false
         return member == other.member && product == other.product
     }
 
