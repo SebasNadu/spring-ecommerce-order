@@ -2,12 +2,12 @@ package ecommerce.services.cart
 
 import ecommerce.controller.cart.usecase.ManageCartItemUseCase
 import ecommerce.controller.member.usecase.CrudMemberUseCase
-import ecommerce.entities.CartItem
+import ecommerce.entities.CartItemEntity
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
-import ecommerce.model.CartItemRequestDTO
-import ecommerce.model.CartItemResponseDTO
+import ecommerce.dto.CartItemRequestDTO
+import ecommerce.dto.CartItemResponseDTO
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.ProductRepository
 import org.springframework.dao.EmptyResultDataAccessException
@@ -76,12 +76,12 @@ class CartItemServiceImpl(
     private fun handleCreate(
         cartItemRequestDTO: CartItemRequestDTO,
         memberId: Long,
-    ): CartItem {
+    ): CartItemEntity {
         val product = productRepository.findByIdOrNull(cartItemRequestDTO.productId)
         if (product == null) throw OperationFailedException("Invalid Product Id ${cartItemRequestDTO.productId}")
         val member = memberService.findById(memberId)
         return cartItemRepository.save(
-            CartItem(
+            CartItemEntity(
                 member = member.toEntity(),
                 product = product,
                 quantity = if (cartItemRequestDTO.quantity == 0) 1 else cartItemRequestDTO.quantity,
@@ -93,7 +93,7 @@ class CartItemServiceImpl(
     private fun handleUpdate(
         cartItemRequestDTO: CartItemRequestDTO,
         memberId: Long,
-    ): CartItem {
+    ): CartItemEntity {
         val existing =
             cartItemRepository
                 .findByProductIdAndMemberId(cartItemRequestDTO.productId, memberId)

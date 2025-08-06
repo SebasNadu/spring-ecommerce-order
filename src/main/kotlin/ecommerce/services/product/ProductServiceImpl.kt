@@ -5,9 +5,9 @@ import ecommerce.exception.NotFoundException
 import ecommerce.exception.OperationFailedException
 import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
-import ecommerce.model.ProductPatchDTO
-import ecommerce.model.ProductRequestDTO
-import ecommerce.model.ProductResponseDTO
+import ecommerce.dto.ProductPatchDTO
+import ecommerce.dto.ProductRequestDTO
+import ecommerce.dto.ProductResponseDTO
 import ecommerce.repositories.ProductRepository
 import org.springframework.context.annotation.Primary
 import org.springframework.data.domain.Page

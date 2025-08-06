@@ -5,9 +5,9 @@ import ecommerce.controller.admin.usecase.FindMembersWithRecentCartActivityUseCa
 import ecommerce.controller.admin.usecase.FindTopProductsUseCase
 import ecommerce.exception.NoSuchElementException
 import ecommerce.mappers.toEntity
-import ecommerce.model.ActiveMemberDTO
-import ecommerce.model.OptionDTO
-import ecommerce.model.TopProductDTO
+import ecommerce.dto.ActiveMemberDTO
+import ecommerce.dto.OptionDTO
+import ecommerce.dto.TopProductDTO
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.ProductRepository
 import org.springframework.data.repository.findByIdOrNull

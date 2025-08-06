@@ -1,6 +1,6 @@
 package ecommerce.infrastructure
 
-import ecommerce.entities.Member
+import ecommerce.entities.MemberEntity
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,7 +19,7 @@ class JwtTokenProviderTest {
 
     @Test
     fun `should create a valid token`() {
-        val token = jwtTokenProvider.createToken("123", Member.Role.CUSTOMER)
+        val token = jwtTokenProvider.createToken("123", MemberEntity.Role.CUSTOMER)
 
         assertThat(token).isNotBlank()
         assertThat(jwtTokenProvider.validateToken(token)).isTrue()
@@ -27,12 +27,12 @@ class JwtTokenProviderTest {
 
     @Test
     fun `should extract correct payload and role from token`() {
-        val token = jwtTokenProvider.createToken("42", Member.Role.ADMIN)
+        val token = jwtTokenProvider.createToken("42", MemberEntity.Role.ADMIN)
 
         val (payload, role) = jwtTokenProvider.getPayload(token)
 
         assertThat(payload).isEqualTo("42")
-        assertThat(role).isEqualTo(Member.Role.ADMIN)
+        assertThat(role).isEqualTo(MemberEntity.Role.ADMIN)
     }
 
     @Test
@@ -45,7 +45,7 @@ class JwtTokenProviderTest {
     @Test
     fun `should return false for expired token`() {
         val shortLivedProvider = JwtTokenProvider(secretKey, 1) // 1 ms
-        val token = shortLivedProvider.createToken("expired", Member.Role.CUSTOMER)
+        val token = shortLivedProvider.createToken("expired", MemberEntity.Role.CUSTOMER)
         Thread.sleep(5)
 
         assertThat(shortLivedProvider.validateToken(token)).isFalse()
