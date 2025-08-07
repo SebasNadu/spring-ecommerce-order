@@ -10,13 +10,13 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory
 
 @Configuration
 class StripeClientConfiguration {
-
     @Bean
     fun stripeClient(stripeProperties: StripeProperties): StripeClient {
-        val restClient = RestClient.builder()
-            .baseUrl("https://api.stripe.com")
-            .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer ${stripeProperties.secretKey}")
-            .build()
+        val restClient =
+            RestClient.builder()
+                .baseUrl("https://api.stripe.com")
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer ${stripeProperties.secretKey}")
+                .build()
 
         val adapter = RestClientAdapter.create(restClient)
         val factory = HttpServiceProxyFactory.builderFor(adapter).build()

@@ -10,7 +10,6 @@ import ecommerce.mappers.toDTO
 import ecommerce.mappers.toEntity
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.OptionRepository
-import ecommerce.repositories.ProductRepository
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -20,7 +19,6 @@ import java.time.LocalDateTime
 @Service
 class CartItemServiceImpl(
     private val cartItemRepository: CartItemRepository,
-    private val productRepository: ProductRepository,
     private val optionRepository: OptionRepository,
     private val memberService: CrudMemberUseCase,
 ) : ManageCartItemUseCase {
@@ -79,8 +77,9 @@ class CartItemServiceImpl(
         cartItemRequestDTO: CartItemRequestDTO,
         memberId: Long,
     ): CartItemEntity {
-        val option = optionRepository.findByIdOrNull(cartItemRequestDTO.optionId)
-            ?: throw OperationFailedException("Invalid Product Id ${cartItemRequestDTO.optionId}")
+        val option =
+            optionRepository.findByIdOrNull(cartItemRequestDTO.optionId)
+                ?: throw OperationFailedException("Invalid Product Id ${cartItemRequestDTO.optionId}")
         option.checkStock(cartItemRequestDTO.quantity)
         val member = memberService.findById(memberId)
         return cartItemRepository.save(

@@ -79,15 +79,14 @@ class CartItemE2ETest {
 
     @Test
     fun `delete cart item`() {
-        val cartItem = addCartItemAndReturn()
-        val products =
-            RestAssured.given()
-                .header("Authorization", "Bearer $token")
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .get("/api/products")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value())
-                .extract().body().`as`(object : TypeRef<PageResponseDTO<ProductResponseDTO>>() {})
+        addCartItemAndReturn()
+        RestAssured.given()
+            .header("Authorization", "Bearer $token")
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .get("/api/products")
+            .then().log().all()
+            .statusCode(HttpStatus.OK.value())
+            .extract().body().`as`(object : TypeRef<PageResponseDTO<ProductResponseDTO>>() {})
 
         RestAssured.given()
             .header("Authorization", "Bearer $token")

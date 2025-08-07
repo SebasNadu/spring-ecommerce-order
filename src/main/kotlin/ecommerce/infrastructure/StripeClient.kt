@@ -11,7 +11,9 @@ import org.springframework.web.service.annotation.PostExchange
 interface StripeClient {
     @PostExchange(
         contentType = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-        accept = [MediaType.APPLICATION_JSON_VALUE]
+        accept = [MediaType.APPLICATION_JSON_VALUE],
     )
-    fun createPaymentIntent(@RequestBody body: MultiValueMap<String, String>): StripeResponse
+    fun createPaymentIntent(
+        @RequestBody body: MultiValueMap<String, String>,
+    ): StripeResponse
 }

@@ -63,21 +63,23 @@ class AdminServiceTest {
         product2 =
             productRepository.save(ProductEntity(name = "Keyboard", price = 20.0, imageUrl = "http://keyboard.jpg"))
 
-        option1 = optionRepository.save(
-            OptionEntity(
-                name = "Mouse", product = product1,
-                quantity = 3,
-                unitPrice = 100.0,
+        option1 =
+            optionRepository.save(
+                OptionEntity(
+                    name = "Mouse", product = product1,
+                    quantity = 3,
+                    unitPrice = 100.0,
+                ),
             )
-        )
 
-        option2 = optionRepository.save(
-            OptionEntity(
-                name = "Keyboard", product = product2,
-                quantity = 3,
-                unitPrice = 100.0,
+        option2 =
+            optionRepository.save(
+                OptionEntity(
+                    name = "Keyboard", product = product2,
+                    quantity = 3,
+                    unitPrice = 100.0,
+                ),
             )
-        )
 
         cartItemService.addOrUpdate(CartItemRequestDTO(option1.id, 1), member1.id)
         cartItemService.addOrUpdate(CartItemRequestDTO(option2.id, 2), member1.id)

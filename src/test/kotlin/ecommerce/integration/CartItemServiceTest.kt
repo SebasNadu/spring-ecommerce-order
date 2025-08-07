@@ -5,7 +5,6 @@ import ecommerce.dto.CartItemRequestDTO
 import ecommerce.entities.OptionEntity
 import ecommerce.entities.ProductEntity
 import ecommerce.mappers.toDTO
-import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.MemberRepository
 import ecommerce.repositories.OptionRepository
 import ecommerce.repositories.ProductRepository
@@ -47,14 +46,15 @@ class CartItemServiceTest {
             )
 
         val product = productRepository.save(productEntity)
-        optionId = optionRepository.save(
-            OptionEntity(
-                name = "Mechanical Keyboard",
-                quantity = 2,
-                product = product,
-                unitPrice = 100.0,
-            ),
-        ).id
+        optionId =
+            optionRepository.save(
+                OptionEntity(
+                    name = "Mechanical Keyboard",
+                    quantity = 2,
+                    product = product,
+                    unitPrice = 100.0,
+                ),
+            ).id
     }
 
     @Test
