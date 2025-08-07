@@ -27,6 +27,8 @@ class OptionEntity(
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
     var product: ProductEntity,
+    @Column(nullable = false)
+    var unitPrice: Double,
     @OneToMany(mappedBy = "option", cascade = [CascadeType.ALL], orphanRemoval = true)
     val cartItems: MutableSet<CartItemEntity> = mutableSetOf(),
     @Id
@@ -51,6 +53,9 @@ class OptionEntity(
         this.name = name
         this.quantity = quantity
     }
+
+    val totalPrice: Double
+        get() = unitPrice * quantity
 
     fun checkStock(quantity: Int) {
         if (this.quantity == 0L) throw InsufficientStockException("Option is out of stock")

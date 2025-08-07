@@ -60,19 +60,22 @@ class AdminServiceTest {
         member2 = memberRepository.save(MemberEntity(name = "m2", email = "m2@example.com", password = "pw"))!!
 
         product1 = productRepository.save(ProductEntity(name = "Mouse", price = 10.0, imageUrl = "http://mouse.jpg"))
-        product2 = productRepository.save(ProductEntity(name = "Keyboard", price = 20.0, imageUrl = "http://keyboard.jpg"))
+        product2 =
+            productRepository.save(ProductEntity(name = "Keyboard", price = 20.0, imageUrl = "http://keyboard.jpg"))
 
         option1 = optionRepository.save(
             OptionEntity(
                 name = "Mouse", product = product1,
-                quantity = 3
+                quantity = 3,
+                unitPrice = 100.0,
             )
         )
 
         option2 = optionRepository.save(
             OptionEntity(
                 name = "Keyboard", product = product2,
-                quantity = 3
+                quantity = 3,
+                unitPrice = 100.0,
             )
         )
 

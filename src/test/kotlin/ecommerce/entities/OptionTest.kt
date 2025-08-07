@@ -16,6 +16,7 @@ class OptionTest {
                 name = "Test",
                 quantity = 10,
                 product = product,
+                unitPrice = 100.0,
             )
         option.subtract(3)
         assertEquals(7, option.quantity)
@@ -23,7 +24,7 @@ class OptionTest {
 
     @Test
     fun `subtract should throw if quantity is less than 1`() {
-        val option = OptionEntity(name = "Test", quantity = 10, product)
+        val option = OptionEntity(name = "Test", quantity = 10, product, unitPrice = 100.0)
         assertThrows<InvalidOptionQuantityException> {
             option.subtract(0)
         }
@@ -31,7 +32,7 @@ class OptionTest {
 
     @Test
     fun `subtract should throw if subtracting more than stock`() {
-        val option = OptionEntity(name = "Test", quantity = 5, product)
+        val option = OptionEntity(name = "Test", quantity = 5, product, unitPrice = 100.0)
         assertThrows<InsufficientStockException> {
             option.subtract(10)
         }

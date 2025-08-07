@@ -78,19 +78,19 @@ class DatabaseConfig(
         val savedMembers = memberRepository.saveAll(listOf(admin) + customers)
 
         val carOptions = listOf(
-            OptionEntity(name = "Red Color", quantity = 5, product = savedProducts[0]),
-            OptionEntity(name = "Blue Color", quantity = 3, product = savedProducts[0]),
-            OptionEntity(name = "Black Color", quantity = 4, product = savedProducts[0]),
-            OptionEntity(name = "Automatic Transmission", quantity = 2, product = savedProducts[0]),
-            OptionEntity(name = "Manual Transmission", quantity = 3, product = savedProducts[0]),
+            OptionEntity(name = "Red Color", quantity = 5, product = savedProducts[0], unitPrice = 1200.0),
+            OptionEntity(name = "Blue Color", quantity = 3, product = savedProducts[0], unitPrice = 1150.0),
+            OptionEntity(name = "Black Color", quantity = 4, product = savedProducts[0], unitPrice = 1250.0),
+            OptionEntity(name = "Automatic Transmission", quantity = 2, product = savedProducts[0], unitPrice = 1400.0),
+            OptionEntity(name = "Manual Transmission", quantity = 3, product = savedProducts[0], unitPrice = 1100.0),
         )
 
         val bikeOptions = listOf(
-            OptionEntity(name = "Small Size", quantity = 10, product = savedProducts[1]),
-            OptionEntity(name = "Medium Size", quantity = 15, product = savedProducts[1]),
-            OptionEntity(name = "Large Size", quantity = 8, product = savedProducts[1]),
-            OptionEntity(name = "Red Color", quantity = 12, product = savedProducts[1]),
-            OptionEntity(name = "Black Color", quantity = 7, product = savedProducts[1]),
+            OptionEntity(name = "Small Size", quantity = 10, product = savedProducts[1], unitPrice = 220.0),
+            OptionEntity(name = "Medium Size", quantity = 15, product = savedProducts[1], unitPrice = 240.0),
+            OptionEntity(name = "Large Size", quantity = 8, product = savedProducts[1], unitPrice = 260.0),
+            OptionEntity(name = "Red Color", quantity = 12, product = savedProducts[1], unitPrice = 230.0),
+            OptionEntity(name = "Black Color", quantity = 7, product = savedProducts[1], unitPrice = 250.0),
         )
 
         val savedCarOptions = optionRepository.saveAll(carOptions)

@@ -51,7 +51,8 @@ class CartItemServiceTest {
             OptionEntity(
                 name = "Mechanical Keyboard",
                 quantity = 2,
-                product = product
+                product = product,
+                unitPrice = 100.0,
             ),
         ).id
     }
@@ -93,7 +94,7 @@ class CartItemServiceTest {
     @Test
     fun `findByMember should return cart items for a member`() {
         val member = memberRepository.findByIdOrNull(memberId)?.toDTO()
-        cartItemService.addOrUpdate(CartItemRequestDTO(optionId,   1), member?.id!!)
+        cartItemService.addOrUpdate(CartItemRequestDTO(optionId, 1), member?.id!!)
 
         val items = cartItemService.findByMember(memberId)
 
