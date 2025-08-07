@@ -37,6 +37,7 @@
 - [x] Implement `StripeService` to encapsulate Stripe API interactions; include unit tests to verify behavior.
 - [x] Refactor `CartItem` entity to replace `productId` with `optionId` for precise product variant handling.
 - [x] Validate that `CartItem.quantity` does not exceed available stock quantity in the associated `Option`.
+- [x] Add unitPrice to the `Option` entity and dto to reflect the price of each option.
 
 - [ ] Create `Order` entity with the following fields:
     - `id`
