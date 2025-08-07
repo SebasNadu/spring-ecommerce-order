@@ -138,6 +138,7 @@ class AdminE2ETest {
                 name = "Test Option",
                 quantity = 10,
                 productId = product.id,
+                unitPrice = 100.0,
             )
 
         val response =
@@ -160,6 +161,7 @@ class AdminE2ETest {
                 name = longName,
                 quantity = 10,
                 productId = product.id,
+                unitPrice = 100.0,
             )
 
         val response =
@@ -181,6 +183,7 @@ class AdminE2ETest {
                 name = "Test Option",
                 quantity = 0,
                 productId = product.id,
+                unitPrice = 100.0,
             )
 
         val response =
@@ -202,6 +205,7 @@ class AdminE2ETest {
                 name = "Test Option",
                 quantity = 100_000_000,
                 productId = product.id,
+                unitPrice = 100.0,
             )
 
         val response =
@@ -233,6 +237,7 @@ class AdminE2ETest {
                 name = "Test Option",
                 quantity = 10,
                 productId = product.id,
+                unitPrice = 100.0,
             )
 
         RestAssured.given()

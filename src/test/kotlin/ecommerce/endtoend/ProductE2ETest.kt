@@ -66,6 +66,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -111,6 +112,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -141,6 +143,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -173,6 +176,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -205,6 +209,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -237,6 +242,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -269,6 +275,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -291,6 +298,7 @@ class ProductE2ETest {
                             name = "ello",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -321,6 +329,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
@@ -359,6 +368,7 @@ class ProductE2ETest {
                             name = "hi",
                             quantity = 99,
                             productId = null,
+                            unitPrice = 100.0,
                         ),
                     ),
             )
