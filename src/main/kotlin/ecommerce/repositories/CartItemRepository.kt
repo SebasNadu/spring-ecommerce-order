@@ -3,8 +3,6 @@ package ecommerce.repositories
 import ecommerce.dto.ActiveMemberDTO
 import ecommerce.dto.TopProductDTO
 import ecommerce.entities.CartItemEntity
-import ecommerce.entities.MemberEntity
-import ecommerce.model.Member
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 

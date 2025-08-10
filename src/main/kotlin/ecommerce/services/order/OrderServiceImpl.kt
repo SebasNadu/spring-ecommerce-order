@@ -29,21 +29,27 @@ class OrderServiceImpl(
     private val cartItemRepository: CartItemRepository,
     private val memberRepository: MemberRepository,
     private val orderRepository: OrderRepository,
-    private val paymentService: PaymentService
+    private val paymentService: PaymentService,
 ) : OrderCreationUseCase {
     @Transactional
-    override fun create(memberLoginDTO: MemberLoginDTO, paymentRequest: PaymentRequest): OrderDTO {
-        val member = memberRepository.findByIdOrNull(memberLoginDTO.id)
-            ?: throw NotFoundException("Member not found")
+    override fun create(
+        memberLoginDTO: MemberLoginDTO,
+        paymentRequest: PaymentRequest,
+    ): OrderDTO {
+        val member =
+            memberRepository.findByIdOrNull(memberLoginDTO.id)
+                ?: throw NotFoundException("Member not found")
         val cartItems = cartItemRepository.findByMemberId(member.id)
         if (cartItems.isEmpty()) throw OperationFailedException("Cart is empty")
 
         validateStock(cartItems)
 
-        val stripeResponse = stripeService.createPaymentIntent(
-            paymentRequest.copy(
-                amount = cartItems.sumOf { it.option.totalPrice }
-            ))
+        val stripeResponse =
+            stripeService.createPaymentIntent(
+                paymentRequest.copy(
+                    amount = cartItems.sumOf { it.option.totalPrice },
+                ),
+            )
 
         val order = buildOrderEntity(member, cartItems, stripeResponse)
         val savedOrder = orderRepository.save(order)
@@ -56,19 +62,23 @@ class OrderServiceImpl(
     private fun buildOrderEntity(
         member: MemberEntity,
         cartItems: List<CartItemEntity>,
-        stripeResponse: StripeResponse
+        stripeResponse: StripeResponse,
     ): OrderEntity {
-        val order = OrderEntity(
-            status = OrderEntity.OrderStatus.CREATED,
-            totalAmount = stripeResponse.amount!!,
-            member = member,
-        )
+        val order =
+            OrderEntity(
+                status = OrderEntity.OrderStatus.CREATED,
+                totalAmount = stripeResponse.amount!!,
+                member = member,
+            )
         val orderItems = cartItems.map { OrderItemEntity(order, it.option, it.quantity, it.option.unitPrice) }
         order.addAllItems(orderItems)
         return order
     }
 
-    private fun processPaymentOutcome(payment: PaymentDTO, cartItems: List<CartItemEntity>) {
+    private fun processPaymentOutcome(
+        payment: PaymentDTO,
+        cartItems: List<CartItemEntity>,
+    ) {
         when (payment.status) {
             PaymentEntity.PaymentStatus.SUCCEEDED -> {
                 decreaseOptionStock(cartItems)

@@ -12,6 +12,6 @@ fun PaymentEntity.toDTO(): PaymentDTO {
         status = this.status,
         failureCode = this.failureCode,
         failureMessage = this.failureMessage,
-        orderId = this.order.id!!
+        orderId = this.order.id!!,
     )
 }

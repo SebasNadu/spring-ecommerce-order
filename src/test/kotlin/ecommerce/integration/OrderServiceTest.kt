@@ -11,12 +11,14 @@ import ecommerce.exception.OperationFailedException
 import ecommerce.model.PaymentRequest
 import ecommerce.repositories.CartItemRepository
 import ecommerce.repositories.MemberRepository
-import ecommerce.repositories.OrderRepository
 import ecommerce.repositories.OptionRepository
+import ecommerce.repositories.OrderRepository
 import ecommerce.services.order.OrderServiceImpl
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertNotNull
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -26,8 +28,7 @@ import java.time.LocalDateTime
 
 @SpringBootTest
 @Transactional
-class OrderServiceImplIntegrationTest {
-
+class OrderServiceTest {
     @Autowired
     lateinit var orderService: OrderServiceImpl
 
@@ -57,12 +58,13 @@ class OrderServiceImplIntegrationTest {
         option = options[0]
 
         // Add an item to the member's cart
-        val cartItemEntity = CartItemEntity(
-            member = member,
-            option = option,
-            quantity = 2,
-            addedAt = LocalDateTime.now(),
-        )
+        val cartItemEntity =
+            CartItemEntity(
+                member = member,
+                option = option,
+                quantity = 2,
+                addedAt = LocalDateTime.now(),
+            )
 
         cartItem = cartItemRepository.save(cartItemEntity)
     }
@@ -70,11 +72,12 @@ class OrderServiceImplIntegrationTest {
     @Test
     fun `create should create order, payment, reduce stock and clear cart`() {
         val memberLoginDTO = MemberLoginDTO(id = member.id)
-        val paymentRequest = PaymentRequest(
-            amount = 2000.0,
-            currency = "eur",
-            paymentMethod = "pm_card_visa"
-        )
+        val paymentRequest =
+            PaymentRequest(
+                amount = 2000.0,
+                currency = "eur",
+                paymentMethod = "pm_card_visa",
+            )
 
         val orderDTO: OrderDTO = orderService.create(memberLoginDTO, paymentRequest)
 
@@ -92,7 +95,7 @@ class OrderServiceImplIntegrationTest {
 
         val updatedOption = optionRepository.findByIdOrNull(option.id)
         assertNotNull(updatedOption)
-        assertEquals(3, updatedOption?.quantity)  // 10 - 2 = 8
+        assertEquals(3, updatedOption?.quantity) // 10 - 2 = 8
 
         val cartItemsAfter = cartItemRepository.findByMemberId(member.id)
         assertTrue(cartItemsAfter.isEmpty())
@@ -101,11 +104,12 @@ class OrderServiceImplIntegrationTest {
     @Test
     fun `create should throw if member not found`() {
         val invalidMemberDTO = MemberLoginDTO(id = 999999L) // non-existent id
-        val paymentRequest = PaymentRequest(
-            amount = 1000.0,
-            currency = "eur",
-            paymentMethod = "pm_card_visa"
-        )
+        val paymentRequest =
+            PaymentRequest(
+                amount = 1000.0,
+                currency = "eur",
+                paymentMethod = "pm_card_visa",
+            )
 
         assertThrows<NotFoundException> {
             orderService.create(invalidMemberDTO, paymentRequest)
@@ -117,14 +121,16 @@ class OrderServiceImplIntegrationTest {
         cartItemRepository.deleteById(cartItem.id)
 
         val memberLoginDTO = MemberLoginDTO(id = member.id)
-        val paymentRequest = PaymentRequest(
-            amount = 1000.0,
-            currency = "eur",
-            paymentMethod = "pm_card_visa"
-        )
+        val paymentRequest =
+            PaymentRequest(
+                amount = 1000.0,
+                currency = "eur",
+                paymentMethod = "pm_card_visa",
+            )
 
-        val ex = assertThrows<OperationFailedException> {
-            orderService.create(memberLoginDTO, paymentRequest)
-        }
+        val ex =
+            assertThrows<OperationFailedException> {
+                orderService.create(memberLoginDTO, paymentRequest)
+            }
     }
 }

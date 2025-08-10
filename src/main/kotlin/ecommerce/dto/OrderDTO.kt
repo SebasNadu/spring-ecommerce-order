@@ -1,8 +1,6 @@
 package ecommerce.dto
 
 import ecommerce.entities.OrderEntity
-import ecommerce.model.Member
-import java.time.LocalDateTime
 
 class OrderDTO(
     val status: OrderEntity.OrderStatus,

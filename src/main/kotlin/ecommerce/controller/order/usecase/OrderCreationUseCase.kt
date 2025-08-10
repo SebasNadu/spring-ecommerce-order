@@ -5,5 +5,8 @@ import ecommerce.dto.OrderDTO
 import ecommerce.model.PaymentRequest
 
 interface OrderCreationUseCase {
-    fun create(memberLoginDTO: MemberLoginDTO, paymentRequest: PaymentRequest): OrderDTO
+    fun create(
+        memberLoginDTO: MemberLoginDTO,
+        paymentRequest: PaymentRequest,
+    ): OrderDTO
 }

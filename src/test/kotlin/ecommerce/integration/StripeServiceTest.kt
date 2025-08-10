@@ -18,11 +18,12 @@ class StripeServiceTest {
 
     @Test
     fun `createPaymentIntent returns valid response from Stripe`() {
-        val paymentRequest = PaymentRequest(
-            amount = 1000.0,
-            currency = "usd",
-            paymentMethod = "pm_card_visa"
-        )
+        val paymentRequest =
+            PaymentRequest(
+                amount = 1000.0,
+                currency = "usd",
+                paymentMethod = "pm_card_visa",
+            )
 
         val response = stripeService.createPaymentIntent(paymentRequest)
 
@@ -33,38 +34,41 @@ class StripeServiceTest {
         assertEquals("usd", response.currency?.lowercase())
         assertTrue(
             response.status.equals("requires_payment_method", ignoreCase = true) ||
-                    response.status.equals("succeeded", ignoreCase = true) ||
-                    response.status.equals("requires_action", ignoreCase = true)
+                response.status.equals("succeeded", ignoreCase = true) ||
+                response.status.equals("requires_action", ignoreCase = true),
         )
     }
 
-
     @Test
     fun `createPaymentIntent fails with radar block payment method`() {
-        val paymentRequest = PaymentRequest(
-            amount = 1000.0,
-            currency = "usd",
-            paymentMethod = "pm_card_radarBlock"
-        )
+        val paymentRequest =
+            PaymentRequest(
+                amount = 1000.0,
+                currency = "usd",
+                paymentMethod = "pm_card_radarBlock",
+            )
 
-        val exception = assertThrows<PaymentFailedException> {
-            stripeService.createPaymentIntent(paymentRequest)
-        }
+        val exception =
+            assertThrows<PaymentFailedException> {
+                stripeService.createPaymentIntent(paymentRequest)
+            }
         println("Expected failure: ${exception.message}")
         assertTrue(exception.message!!.contains("Stripe payment initialization failed"))
     }
 
     @Test
     fun `createPaymentIntent fails for charge declined`() {
-        val paymentRequest = PaymentRequest(
-            amount = 1000.0,
-            currency = "usd",
-            paymentMethod = "pm_card_visa_chargeDeclined"
-        )
+        val paymentRequest =
+            PaymentRequest(
+                amount = 1000.0,
+                currency = "usd",
+                paymentMethod = "pm_card_visa_chargeDeclined",
+            )
 
-        val exception = assertThrows<PaymentFailedException> {
-            stripeService.createPaymentIntent(paymentRequest)
-        }
+        val exception =
+            assertThrows<PaymentFailedException> {
+                stripeService.createPaymentIntent(paymentRequest)
+            }
         println(">>>>Expected failure: ${exception.message}")
         assertTrue(exception.message!!.contains("Stripe payment initialization failed"))
     }
