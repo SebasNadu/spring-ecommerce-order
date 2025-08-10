@@ -30,9 +30,9 @@ class ProductServiceImpl(
 
     @Transactional(readOnly = true)
     override fun findById(id: Long): ProductResponseDTO {
-        val product = productRepository.findByIdOrNull(id)
-
-        if (product == null) throw NotFoundException("Product with id=$id not found")
+        val product =
+            productRepository.findByIdOrNull(id)
+                ?: throw NotFoundException("Product with id=$id not found")
         return product.toDTO()
     }
 

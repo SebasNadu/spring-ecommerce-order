@@ -23,7 +23,7 @@ import jakarta.persistence.UniqueConstraint
 )
 class OptionEntity(
     name: String,
-    quantity: Long,
+    quantity: Int,
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
     var product: ProductEntity,
@@ -43,7 +43,7 @@ class OptionEntity(
         }
 
     @Column(name = "quantity", nullable = false)
-    var quantity: Long = quantity
+    var quantity: Int = quantity
         set(value) {
             validateQuantity(value)
             field = value
@@ -58,14 +58,18 @@ class OptionEntity(
         get() = unitPrice * quantity
 
     fun checkStock(quantity: Int) {
-        if (this.quantity == 0L) throw InsufficientStockException("Option is out of stock")
+        if (this.quantity == 0) throw InsufficientStockException("Option is out of stock")
         if (this.quantity < quantity) throw InsufficientStockException("Not enough stock")
     }
 
-    fun subtract(quantity: Long) {
+    fun subtract(quantity: Int) {
         if (quantity < 1) throw InvalidOptionQuantityException("Subtract amount must be >= 1")
         if (this.quantity < quantity) throw InsufficientStockException("Not enough stock")
         this.quantity -= quantity
+    }
+
+    fun validateStock(quantity: Int) {
+        if (this.quantity < quantity) throw InsufficientStockException("Not enough stock for option $id")
     }
 
     override fun equals(other: Any?): Boolean {
@@ -86,7 +90,7 @@ class OptionEntity(
         if (!allowed.matches(name)) throw InvalidOptionNameException("Option names contains invalid characters: '$name'")
     }
 
-    private fun validateQuantity(quantity: Long) {
+    private fun validateQuantity(quantity: Int) {
         if (quantity < 1 || quantity >= 100_000_000) throw InvalidOptionQuantityException("Quantity must be between 1 and 99,999,999")
     }
 }
