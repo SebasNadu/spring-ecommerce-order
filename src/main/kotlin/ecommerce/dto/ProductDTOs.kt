@@ -31,7 +31,7 @@ data class ProductRequestDTO(
     @field:Pattern(regexp = "^https?://.*$", message = ValidationMessages.IMAGE_FORMAT)
     var imageUrl: String,
     @field:NotEmpty(message = ValidationMessages.OPTION_REQUIRED)
-    val options: Set<OptionDTO>,
+    val options: Set<OptionDTO> = emptySet(),
     var id: Long = 0L,
 )
 
