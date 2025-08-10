@@ -39,20 +39,19 @@
 - [x] Validate that `CartItem.quantity` does not exceed available stock quantity in the associated `Option`.
 - [x] Add unitPrice to the `Option` entity and dto to reflect the price of each option.
 
-- [ ] Create `Order` entity with the following fields:
-    - `id`
-    - `orderDate` (timestamp of order creation)
-    - `status` (enum: PENDING, PAID, SHIPPED, CANCELED, etc.)
-    - `checkoutSessionId` (Stripe checkout session identifier)
-    - `paymentAmount` (total paid amount)
-    - `member` (Many-to-One relation to the ordering Member)
-- [ ] Design `OrderItem` entity to represent individual purchased options with:
-    - `option` (Many-to-One relation to Option)
-    - `order` (Many-to-One relation to Order)
-    - `quantity`
-    - `unitPrice`
-- [ ] Establish relationships:
+- [x] Create `Order` entity with the following fields:
+- [x] Design `OrderItem` entity to represent individual purchased options with:
+- [x] Establish relationships:
     - `Order` to `Member` as Many-to-One.
     - `Order` to `OrderItem` as One-to-Many.
     - `OrderItem` to `Option` as Many-to-One.
     - `OrderItem` to `Order` as Many-to-One.
+- [x] Create `Payment` entity to store Stripe payment information with fields:
+- [x] Implement `PaymentService` to handle creation and persistence of Payment entities.
+- [x] Update `OrderService` to:
+    - Create and save `Order` and `OrderItem` entities.
+    - Call `StripeService` to create payment intents.
+    - Use `PaymentService` to persist payment details linked to orders.
+    - Handle payment statuses to update stock and cart accordingly.
+    - Ensure transactional consistency across order creation and payment persistence.
+- [x] Handle different payment statuses explicitly, logging or saving failure states instead of silently ignoring them.
