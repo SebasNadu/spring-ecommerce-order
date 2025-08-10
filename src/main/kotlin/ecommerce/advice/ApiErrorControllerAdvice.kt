@@ -8,6 +8,7 @@ import ecommerce.exception.InvalidOptionNameException
 import ecommerce.exception.InvalidOptionQuantityException
 import ecommerce.exception.NotFoundException
 import ecommerce.exception.OperationFailedException
+import ecommerce.exception.PaymentFailedException
 import ecommerce.util.logger
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DuplicateKeyException
@@ -151,6 +152,20 @@ class ApiErrorControllerAdvice {
                 "timestamp" to Instant.now(),
             )
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body)
+    }
+
+    @ExceptionHandler(PaymentFailedException::class)
+    fun handlePaymentFailedException(e: PaymentFailedException): ResponseEntity<Map<String, Any>> {
+        val errorMessage = e.message ?: "Payment failed"
+        log.error("PaymentFailedException: $errorMessage", e)
+        val body =
+            mapOf(
+                "status" to HttpStatus.BAD_REQUEST.value(),
+                "error" to "Payment failed",
+                "message" to errorMessage,
+                "timestamp" to Instant.now(),
+            )
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body)
     }
 
     /**
