@@ -17,24 +17,18 @@ class OrderEntity(
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     val status: OrderStatus,
-
     @Column(nullable = false)
     val totalAmount: Long,
-
     @ManyToOne(fetch = FetchType.LAZY)
     val member: MemberEntity,
-
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
     val items: MutableList<OrderItemEntity> = mutableListOf(),
-
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
     val payments: MutableList<PaymentEntity> = mutableListOf(),
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 ) : Auditable() {
-
     enum class OrderStatus {
         CREATED,
         PAID,
@@ -42,7 +36,7 @@ class OrderEntity(
         SHIPPED,
         DELIVERED,
         CANCELED,
-        RETURNED
+        RETURNED,
     }
 
     fun addAllItems(orderItems: List<OrderItemEntity>) {

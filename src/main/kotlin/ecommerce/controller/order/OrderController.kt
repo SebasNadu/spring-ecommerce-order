@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/order")
 class OrderController(private val orderCreationUseCase: OrderCreationUseCase) {
     @PostMapping
-    fun createOrder(@LoginMember member: MemberLoginDTO, @RequestBody paymentRequest: PaymentRequest): ResponseEntity<OrderDTO> {
+    fun createOrder(
+        @LoginMember member: MemberLoginDTO,
+        @RequestBody paymentRequest: PaymentRequest,
+    ): ResponseEntity<OrderDTO> {
         val order = orderCreationUseCase.create(member, paymentRequest)
         return ResponseEntity.ok(order)
     }
