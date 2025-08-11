@@ -9,6 +9,6 @@ fun MemberEntity.toDTO() = Member(name, email, password, role, id)
 
 fun Member.toLoginDTO() = MemberLoginDTO(id)
 
-fun Member.toEntity() = MemberEntity(name, email, password, role, id = id!!)
+fun Member.toEntity() = MemberEntity(name, email, password, role, id = id)
 
 fun MemberRegisterDTO.toEntity() = MemberEntity(name, email, password)
