@@ -45,6 +45,9 @@ jobs:
           echo "JWT_EXPIRATION_TIME=${{ secrets.JWT_EXPIRATION_TIME }}" >> .env
           echo "STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}" >> .env
 
+      - name: List files before SCP
+        run: ls -l spring-ecommerce.tar docker-compose.prod.yml .env
+
       - name: Copy image & files to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
