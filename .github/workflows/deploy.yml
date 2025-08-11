@@ -34,6 +34,9 @@ jobs:
       - name: Save Docker image as tar
         run: docker save spring-ecommerce:latest -o spring-ecommerce.tar
 
+      - name: Fix permissions on docker image tar
+        run: chmod 644 spring-ecommerce.tar
+
       - name: Create .env file
         run: |
           echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
@@ -47,15 +50,6 @@ jobs:
 
       - name: List files before SCP
         run: ls -l spring-ecommerce.tar docker-compose.prod.yml .env
-
-      - name: Copy Docker image tar to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: spring-ecommerce.tar
-          target: ~/spring-ecommerce
 
       - name: Copy docker-compose.prod.yml to EC2
         uses: appleboy/scp-action@v0.1.7
@@ -73,6 +67,15 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: .env
+          target: ~/spring-ecommerce
+
+      - name: Copy Docker image tar to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: spring-ecommerce.tar
           target: ~/spring-ecommerce
 
       - name: Deploy on EC2
