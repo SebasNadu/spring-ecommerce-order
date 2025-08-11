@@ -48,13 +48,31 @@ jobs:
       - name: List files before SCP
         run: ls -l spring-ecommerce.tar docker-compose.prod.yml .env
 
-      - name: Copy image & files to EC2
+      - name: Copy Docker image tar to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: spring-ecommerce.tar docker-compose.prod.yml .env
+          source: spring-ecommerce.tar
+          target: ~/spring-ecommerce
+
+      - name: Copy docker-compose.prod.yml to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: docker-compose.prod.yml
+          target: ~/spring-ecommerce
+
+      - name: Copy .env to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: .env
           target: ~/spring-ecommerce
 
       - name: Deploy on EC2
