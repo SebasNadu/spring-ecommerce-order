@@ -1,3 +1,4 @@
+# Stage 1: Build with limited memory for Gradle daemon
 FROM gradle:8.13-jdk21 AS build
 
 WORKDIR /home/gradle/project
@@ -11,10 +12,14 @@ RUN chmod +x gradlew
 
 RUN ./gradlew --version
 
+# Limit Gradle JVM memory to avoid OOM
+ENV GRADLE_OPTS="-Xmx256m -Xms128m"
+
 COPY src ./src
 
-RUN ./gradlew clean build -x test --no-daemon --stacktrace
+RUN ./gradlew clean build -x test --no-daemon --stacktrace -Dorg.gradle.jvmargs="-Xmx256m -Xms128m"
 
+# Stage 2: Run with minimal memory settings
 FROM eclipse-temurin:21-jdk-jammy
 
 RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
@@ -27,4 +32,5 @@ USER appuser
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Xms512m", "-Xmx1024m", "-jar", "/app/app.jar"]
+# JVM tuned for low memory footprint, minimal heap and metaspace
+ENTRYPOINT ["java", "-Xms256m", "-Xmx512m", "-XX:MaxMetaspaceSize=128m", "-XX:+UseG1GC", "-jar", "/app/app.jar"]
