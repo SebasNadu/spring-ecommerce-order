@@ -87,15 +87,15 @@ class OrderServiceTest {
 
         val order = orderRepository.findByIdOrNull(orderDTO.id!!)
         assertNotNull(order)
-        assertEquals(OrderEntity.OrderStatus.CREATED, order?.status)
+        assertEquals(OrderEntity.OrderStatus.CREATED, order.status)
 
-        assertEquals(1, order?.items?.size)
-        assertEquals(option.id, order!!.items[0].option.id)
+        assertEquals(1, order.items.size)
+        assertEquals(option.id, order.items[0].option.id)
         assertEquals(2, order.items[0].quantity)
 
         val updatedOption = optionRepository.findByIdOrNull(option.id)
         assertNotNull(updatedOption)
-        assertEquals(3, updatedOption?.quantity) // 10 - 2 = 8
+        assertEquals(3, updatedOption.quantity) // 10 - 2 = 8
 
         val cartItemsAfter = cartItemRepository.findByMemberId(member.id)
         assertTrue(cartItemsAfter.isEmpty())
@@ -128,9 +128,8 @@ class OrderServiceTest {
                 paymentMethod = "pm_card_visa",
             )
 
-        val ex =
-            assertThrows<OperationFailedException> {
-                orderService.create(memberLoginDTO, paymentRequest)
-            }
+        assertThrows<OperationFailedException> {
+            orderService.create(memberLoginDTO, paymentRequest)
+        }
     }
 }
