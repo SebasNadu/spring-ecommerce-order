@@ -25,18 +25,18 @@ interface CartItemRepository : JpaRepository<CartItemEntity, Long> {
     )
 
     @Query(
-        nativeQuery = true,
         value = """
-        SELECT o.name AS name,
-               COUNT(*) AS count,
-               MAX(c.added_at) AS mostRecentAddedAt
-        FROM cart_item c
-        JOIN option o ON c.option_id = o.id
-        WHERE c.added_at >=  DATEADD('DAY', -30, CURRENT_TIMESTAMP)
-        GROUP BY c.option_id, o.name
-        ORDER BY count DESC, mostRecentAddedAt DESC
-        LIMIT 5
-    """,
+    SELECT o.name AS name,
+           COUNT(*) AS count,
+           MAX(c.added_at) AS mostRecentAddedAt
+    FROM cart_item c
+    JOIN "option" o ON c.option_id = o.id
+    WHERE c.added_at >= DATEADD('DAY', -30, CURRENT_TIMESTAMP)
+    GROUP BY c.option_id, o.name
+    ORDER BY count DESC, mostRecentAddedAt DESC
+    LIMIT 5
+  """,
+        nativeQuery = true,
     )
     fun findTop5ProductsAddedInLast30Days(): List<TopProductDTO>
 
