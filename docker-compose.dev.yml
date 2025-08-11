@@ -2,7 +2,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: prod.dockerfile
+      dockerfile: dev.dockerfile
     container_name: spring-ecommerce-app
     restart: always
     ports:
