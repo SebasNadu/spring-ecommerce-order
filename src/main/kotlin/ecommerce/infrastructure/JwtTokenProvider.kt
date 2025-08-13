@@ -16,7 +16,7 @@ class JwtTokenProvider(
 ) {
     private val secretKey: SecretKey =
         Keys.hmacShaKeyFor(props.secretKey.toByteArray(StandardCharsets.UTF_8))
-    private val validityInMs = props.expireLength
+    private val validityInMs = props.expireLengthMs
 
     fun createToken(
         payload: String,
