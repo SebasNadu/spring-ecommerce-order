@@ -43,4 +43,4 @@ out/
 .env
 
 ### ssl certs ###
-certs/*
+certs/*.pem
