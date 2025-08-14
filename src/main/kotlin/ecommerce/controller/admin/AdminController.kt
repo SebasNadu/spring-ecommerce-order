@@ -1,6 +1,7 @@
 package ecommerce.controller.admin
 
 import ecommerce.annotation.CheckAdminOnly
+import ecommerce.annotation.IgnoreCheckLogin
 import ecommerce.controller.admin.usecase.CreateOptionUseCase
 import ecommerce.controller.admin.usecase.FindMembersWithRecentCartActivityUseCase
 import ecommerce.controller.admin.usecase.FindTopProductsUseCase
@@ -34,5 +35,12 @@ class AdminController(
     ): ResponseEntity<Unit> {
         createOptionUseCase.create(optionDTO)
         return ResponseEntity.ok().build()
+    }
+
+    @IgnoreCheckLogin
+    @GetMapping("/slow")
+    fun slow(): String {
+        Thread.sleep(15_000) // simulate 15s delay
+        return "Done"
     }
 }

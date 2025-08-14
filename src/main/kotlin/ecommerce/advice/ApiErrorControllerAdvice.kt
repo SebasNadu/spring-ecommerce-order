@@ -19,6 +19,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.client.ResourceAccessException
 import java.time.Instant
 
 @RestControllerAdvice(annotations = [RestController::class])
@@ -166,6 +167,23 @@ class ApiErrorControllerAdvice {
                 "timestamp" to Instant.now(),
             )
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body)
+    }
+
+    /**
+     * Resource Access Exceptions: e.g., timeouts
+     */
+    @ExceptionHandler(ResourceAccessException::class)
+    fun handleResourceAccessException(e: ResourceAccessException): ResponseEntity<Map<String, Any>> {
+        val errorMessage = "Request timed out"
+        log.error("ResourceAccessException: $errorMessage", e)
+        val body =
+            mapOf(
+                "status" to HttpStatus.GATEWAY_TIMEOUT.value(),
+                "error" to "Request Timeout",
+                "message" to errorMessage,
+                "timestamp" to Instant.now(),
+            )
+        return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(body)
     }
 
     /**
