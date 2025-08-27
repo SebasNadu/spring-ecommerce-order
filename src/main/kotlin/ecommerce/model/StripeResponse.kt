@@ -10,7 +10,7 @@ data class StripeResponse(
     val customer: String?,
     val failureCode: String? = null,
     val failureMessage: String? = null,
-    val created: Long?,
+    val created: String? = null,
     val paymentMethod: String?,
     val latestCharge: String?,
 ) {

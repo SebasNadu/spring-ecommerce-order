@@ -1,5 +1,12 @@
 # spring-ecommerce-order
 
+- **App URL** → [https://3.35.139.129/](https://3.35.139.129/) *(Self-signed certificate — browser will show a warning)*
+- To run the app locally, fill in the `example.env` variables and rename the file to `.env`.
+- To run the app with PostgreSQL, use:
+  ```bash
+  docker-compose -f docker-compose.dev.yml up -d
+  ```
+
 ## Features
 
 ### Step 1.1
@@ -26,7 +33,7 @@
 
 ### Step 2.1
 
-### Step 2.1 — Stripe Integration & Order Management
+### Step 2.1 and 2.2 — Stripe Integration & Order Management
 
 - [x] Add DotEnv dependency to manage environment variables securely (.env files).
 - [x] Implement EnvironmentPostProcessor to load `.env` variables into Spring Environment at startup.
@@ -55,3 +62,13 @@
     - Handle payment statuses to update stock and cart accordingly.
     - Ensure transactional consistency across order creation and payment persistence.
 - [x] Handle different payment statuses explicitly, logging or saving failure states instead of silently ignoring them.
+
+### Step 2.3
+- [x] Integrated PostgreSQL into the project
+- [x] Added Liquibase for database change management
+- [x] Implemented separate dev and prod modes
+- [x] Created Dockerfiles and Docker Compose files for dev/prod environments
+- [x] Added IntelliJ run configurations to start the app and DB separately for testing with PostgreSQL
+- [x] Prepared a GitHub Action for automated deployment (to be enabled when allowed)
+- [x] Deployed to AWS EC2
+

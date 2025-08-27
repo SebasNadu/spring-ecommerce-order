@@ -41,3 +41,6 @@ out/
 
 ### Secrets ###
 .env
+
+### ssl certs ###
+certs/*.pem

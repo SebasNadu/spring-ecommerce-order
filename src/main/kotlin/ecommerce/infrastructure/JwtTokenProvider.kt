@@ -11,12 +11,10 @@ import java.util.Date
 import javax.crypto.SecretKey
 
 @Component
-class JwtTokenProvider(
-    private val props: JwtProperties,
-) {
+class JwtTokenProvider(props: JwtProperties) {
     private val secretKey: SecretKey =
         Keys.hmacShaKeyFor(props.secretKey.toByteArray(StandardCharsets.UTF_8))
-    private val validityInMs = props.expireLength
+    private val validityInMs = props.expireLengthMs
 
     fun createToken(
         payload: String,

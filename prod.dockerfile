@@ -4,7 +4,7 @@ RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
 
 WORKDIR /app
 
-COPY build/libs/*.jar app.jar
+COPY ./build/libs/spring-ecommerce-0.0.1-SNAPSHOT.jar ./app.jar
 
 USER appuser
 

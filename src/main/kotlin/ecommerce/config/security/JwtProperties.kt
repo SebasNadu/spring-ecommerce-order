@@ -11,5 +11,5 @@ class JwtProperties(
     @field:NotBlank
     val secretKey: String,
     @field:Min(1000)
-    val expireLength: Long = 3600000,
+    val expireLengthMs: Long = 3600000,
 )
