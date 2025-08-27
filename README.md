@@ -71,3 +71,4 @@
 - [x] Added IntelliJ run configurations to start the app and DB separately for testing with PostgreSQL
 - [x] Prepared a GitHub Action for automated deployment (to be enabled when allowed)
 - [x] Deployed to AWS EC2
+
